@@ -1,23 +1,23 @@
-import { Box, Button, CircularProgress, Container, Grid, Hidden, makeStyles, TextField, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import { Box, Button, CircularProgress, Container, Grid, Hidden, makeStyles, TextField, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useStore } from 'laco-react';
-import UserStore from '../../src/store/UserStore';
+import UserStore from '../../src/store/userStore';
 import { authenticate } from '../../src/apis/authentication';
 import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
-import ClientCaptcha from "react-client-captcha";
-import BackImg from '../../public/Vector 44.svg'
+import ClientCaptcha from 'react-client-captcha';
+import BackImg from '../../public/Vector 44.svg';
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
 
 const useStyles = makeStyles({
-    conatiner: {
+    container: {
         backgroundImage: `url(${BackImg})`,
         backgroundPosition: 'bottom center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100%',
         height: '100vh'
     }
-})
+});
 
 const Index = () => {
 
@@ -67,7 +67,7 @@ const Index = () => {
 
 
     return (
-        <Box className={classes.conatiner}>
+        <Box className={classes.container}>
             <Container maxWidth={'xl'}>
                 <Grid container justify={'center'} alignItems={'center'} style={{ height: '100vh' }}>
                     <Hidden smDown>
@@ -176,7 +176,7 @@ const Index = () => {
                 </Grid >
             </Container>
         </Box >
-    )
-}
+    );
+};
 
-export default Index
+export default Index;
