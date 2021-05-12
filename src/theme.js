@@ -117,7 +117,7 @@ let theme = createMuiTheme({
     }
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 12,
   },
   props: {
     MuiTab: {
@@ -130,6 +130,28 @@ let theme = createMuiTheme({
     },
   },
 });
+
+theme = {
+  ...theme,
+  overrides: {
+    MuiButton: {
+      contained: {
+        height: '50px',
+        [theme.breakpoints.down('sm')]: {
+          height: '40px'
+        }
+      }
+    },
+    MuiInputBase: {
+      input: {
+        height: '10px',
+        [theme.breakpoints.down('sm')]: {
+          height: '1px'
+        }
+      }
+    }
+  }
+}
 
 // theme = {
 //   ...theme,

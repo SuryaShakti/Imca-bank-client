@@ -2744,6 +2744,11 @@ raw-loader@^2.0.0:
     loader-utils "^1.1.0"
     schema-utils "^1.0.0"
 
+react-client-captcha@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-client-captcha/-/react-client-captcha-1.0.3.tgz#7c31e084fe2b1506f5b6c2c944c3346aaebc9bf6"
+  integrity sha512-uPnU6W/lYg3oEAwK+wo0MYUWWr24gv6QiILGprrDlk6Y/NjJiMOGItBtrDloysGLl0Mz+d1mbc99IWCsVQYWkg==
+
 react-dom@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"

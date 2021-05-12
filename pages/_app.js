@@ -54,13 +54,14 @@ export default function MyApp(props) {
           // });
         });
     } else {
-      if (Router.pathname !== '/login') {
-        Router.replace('/login').then(() => {
-          setLoading(false);
-        });
-      } else {
-        setLoading(false);
-      }
+      // if (Router.pathname !== '/login') {
+      //   Router.replace('/login').then(() => {
+      //     setLoading(false);
+      //   });
+      // } else {
+      //   setLoading(false);
+      // }
+      setLoading(false);
     }
   }, []);
 
