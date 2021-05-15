@@ -116,6 +116,7 @@ const Index = () => {
                                 variant="outlined"
                                 fullWidth
                                 style={{ backgroundColor: '#ffffff' }}
+                                
                             />
                             <Box my={1} />
                             <Box width={'100%'} mb={'5px'}>

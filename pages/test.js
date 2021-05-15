@@ -1,6 +1,7 @@
 import { AppBar, Box, Button, Container, Grid, makeStyles, Toolbar, Typography } from '@material-ui/core'
 import React from 'react';
 import BackImg from '../public/Vector 34 (6).svg';
+import Vector1 from '../public/Group 3 (2).svg';
 
 const useStyles = makeStyles({
     container: {
@@ -47,12 +48,15 @@ const Test = () => {
                         </Box>
                     </Toolbar>
                 </AppBar>
-                <Container maxWidth={'xl'}>
+                <Container
+                    maxWidth={'xl'}
+                    component={Box}
+                    height={'calc(100vh - 48px)'}
+                >
                     <Grid
                         component={Box}
                         container
                         spacing={3}
-                        height={'400px'}
                         alignItems={'center'}
                     >
                         <Grid item xs={12} md={8}>
@@ -101,7 +105,11 @@ const Test = () => {
                             </Box>
                         </Grid>
                     </Grid>
+                    <Box>
+                        <img height={'400px'} src={Vector1} alt={'image 1'} />
+                    </Box>
                 </Container>
+
             </Box>
         </Box>
     )

@@ -29,7 +29,7 @@ let theme = createMuiTheme({
         lineHeight: '40px',
       },
       '@media (max-width:900px)': {
-        fontSize: 24,
+        fontSize: 22,
         lineHeight: '30px',
       },
     },
@@ -71,10 +71,32 @@ let theme = createMuiTheme({
     body1: {
       fontSize: 16,
       fontWeight: 'bold',
+      '@media (max-width:1050px)': {
+        fontSize: 15,
+      },
+      '@media (max-width:900px)': {
+        fontSize: 14,
+        lineHeight: '15px',
+      },
+      '@media (max-width:500px)': {
+        fontSize: 12,
+        lineHeight: '15px',
+      },
     },
     body2: {
       fontWeight: 400,
       letterSpacing: '1px',
+      '@media (max-width:1050px)': {
+        fontSize: 15,
+      },
+      '@media (max-width:900px)': {
+        fontSize: 14,
+        lineHeight: '15px',
+      },
+      '@media (max-width:500px)': {
+        fontSize: 12,
+        lineHeight: '15px',
+      },
     },
     subtitle1: {
       fontSize: 18,
@@ -114,6 +136,10 @@ let theme = createMuiTheme({
       fontSize: 12,
       fontWeight: 400,
       letterSpacing: '1px',
+      '@media (max-width:500px)': {
+        fontSize: 10,
+        lineHeight: '15px',
+      },
     }
   },
   shape: {
