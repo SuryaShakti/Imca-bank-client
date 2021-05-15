@@ -363,21 +363,22 @@ const UiComponents = () => {
                     maxWidth={'500px'}
                     display={'flex'}
                     flexDirection={'column'}
+                    boxShadow={3}
                 >
                     <Box
                         height={'250px'}
                         width={'100%'}
-                        borderRadius={'borderRadius'}
                         bgcolor={'primary.main'}
                         display={'flex'}
                         flexDirection={'column'}
                         justifyContent={'center'}
                         alignItems={'center'}
+                        style={{ borderTopRightRadius: '16px', borderTopLeftRadius: '16px' }}
                     >
                         <Typography variant={'h1'} color={'textSecondary'}>
                             {'Available Amount'}
                         </Typography>
-                        <Typography variant={'h1'} color={'textPrimary'}>
+                        <Typography variant={'h1'} color={'textSecondary'}>
                             {'200000.00'}
                         </Typography>
                     </Box>
@@ -391,17 +392,113 @@ const UiComponents = () => {
                             height={'100%'}
                             width={'50%'}
                             bgcolor={'secondary.main'}
+                            style={{ borderBottomLeftRadius: '16px' }}
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
                         >
-
+                            <Typography variant={'h6'} color={'textSecondary'}>
+                                {'Minimum Amount'}
+                            </Typography>
+                            <Typography variant={'h6'} color={'textSecondary'}>
+                                {'2000.00'}
+                            </Typography>
                         </Box>
                         <Box
                             height={'100%'}
                             width={'50%'}
-                            bgcolor={'error.main'}
+                            // bgcolor={'text.disabled'}
+                            style={{ borderBottomRightRadius: '16px' }}
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                            px={{ xs: 2, md: 3 }}
                         >
-
+                            <Button
+                                variant={'contained'}
+                                color={'primary'}
+                                fullWidth
+                            >
+                                {'Mini Statements'}
+                            </Button>
+                            <Box my={1} />
+                            <Button
+                                variant={'contained'}
+                                color={'secondary'}
+                                fullWidth
+                            >
+                                {'Funds Transfer'}
+                            </Button>
                         </Box>
 
+                    </Box>
+                </Box>
+            </Box>
+
+
+            <Box
+                display={'flex'}
+                justifyContent={'center'}
+                alignItems={'center'}
+                height={'100vh'}
+                p={{ xs: 1, md: 3 }}
+            >
+                <Box
+                    borderRadius={'borderRadius'}
+                    boxShadow={3}
+                    width={{ xs: '95%', md: '80%' }}
+                    p={{ xs: 1, md: 3 }}
+                >
+                    <Box
+                        display={'flex'}
+                        height={'110px'}
+                        borderRadius={'borderRadius'}
+                        boxShadow={3}
+                    >
+                        <Box
+                            px={{ xs: 1, md: 3 }}
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'space-evenly'}
+                            flex={1}
+                            height={'100%'}
+                        >
+                            <Box display={'flex'}>
+                                <Typography variant={'caption'}>
+                                    {'Date: 23-09-21'}
+                                </Typography>
+                                <Typography variant={'caption'}>
+                                    {'Time: 02:36:45'}
+                                </Typography>
+                            </Box>
+                            <Typography variant={'body1'}>
+                                {'To Aurosmruti Das'}
+                            </Typography>
+                            <Box>
+                                <Typography variant={'caption'}>
+                                    {'Account Number : 40092661700021'}
+                                </Typography>
+                            </Box>
+                        </Box>
+                        <Box
+                            height={'100%'}
+                            style={{ borderTopRightRadius: '12px', borderBottomRightRadius: '12px' }}
+                            display={'flex'}
+                            flexDirection={'column'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
+                            bgcolor={'primary.main'}
+                            px={{ xs: 1, md: 3 }}
+                        >
+                            <Typography variant={'h6'} color={'textSecondary'}>
+                                {'Amount'}
+                            </Typography>
+                            <Typography variant={'h6'} color={'textSecondary'}>
+                                {'2000.00'}
+                            </Typography>
+                        </Box>
                     </Box>
                 </Box>
             </Box>

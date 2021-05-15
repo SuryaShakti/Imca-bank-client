@@ -15,6 +15,9 @@ let theme = createMuiTheme({
     background: {
       default: '#ffffff'
     },
+    text:{
+      secondary: '#ffffff'
+    }
   },
   typography: {
     fontFamily: 'poppins',
@@ -68,6 +71,16 @@ let theme = createMuiTheme({
       fontSize: 26,
       letterSpacing: 0.7,
     },
+    h6: {
+      fontWeight: 500,
+      fontSize: 20,
+      letterSpacing: 0.7,
+      '@media (max-width:500px)': {
+        fontSize: 14,
+        lineHeight: '16px',
+      },
+    },
+
     body1: {
       fontSize: 16,
       fontWeight: 'bold',
