@@ -1,6 +1,6 @@
-import { Box, Typography } from '@material-ui/core'
+import { Avatar, Box, Typography } from '@material-ui/core'
 import { useStore } from 'laco-react'
-import React from 'react'
+import React, { useState } from 'react'
 import UserStore from '../../src/store/UserStore'
 
 const Index = () => {
@@ -8,6 +8,8 @@ const Index = () => {
     const { user } = useStore(UserStore);
 
     console.log(user);
+
+    const [accounts, setAccounts] = useState(user.accounts);
 
     return (
         user  && user.accounts ?
@@ -43,30 +45,38 @@ const Index = () => {
                             height={{ xs: '100px', md: '200px' }}
                             bgcolor={'#c1c1c1'}
                             my={2}
+                            display={'flex'}
+                            justifyContent={'center'}
+                            alignItems={'center'}
                         >
+                            <Avatar style={{width: '100%', height: '100%'}} src={user.avatar}></Avatar>
                         </Box>
                         <Typography variant={'body1'} align={'center'}>
-                            {'Surya Shakti'}
+                            {user.name}
                         </Typography>
                         <Box mb={2} />
                         <Typography variant={'body2'} align={'center'}>
-                            {'Plot 97, Old twon, Bhubaneshwar, Odisha'}
+                            {user.address}
                         </Typography>
                         <Box mb={2} />
                         <Typography variant={'body2'} align={'center'}>
-                            {'Phone : 6370882409'}
+                            {`Phone : ${user.phone}`}
                         </Typography>
                         <Box mb={2} />
                         <Typography variant={'body2'} align={'center'}>
-                            {'Email : suryashakti1999@gmail.com'}
+                            {`Email : ${user.email}`}
                         </Typography>
                         <Box mb={2} />
                         <Typography variant={'body2'} align={'center'}>
-                            {'DOB : 10-10-1999'}
+                            {`DOB : ${user.dob}`}
                         </Typography>
                         <Box mb={2} />
                         <Typography variant={'body2'} align={'center'}>
-                            {'Adhaar no : xxxx xxxx 9927 '}
+                            {`Gender : ${user.gender === 1 ? 'Male' : 'Female'}`}
+                        </Typography>
+                        <Box mb={2} />
+                        <Typography variant={'body2'} align={'center'}>
+                            {`Adhaar no : ${user.aadhar}`}
                         </Typography>
                         <Box mb={2} />
                     </Box>
