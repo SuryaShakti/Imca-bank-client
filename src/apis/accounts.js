@@ -2,9 +2,10 @@ import app from './index';
 
 export const AcountService = app.service("accounts");
 
-export const getAllAccounts = (skip = 0) => AccountService.find({
+export const getAllAccounts = (skip = 0, limit) => AccountService.find({
     query: {
-        $skip: skip
+        $skip: skip,
+        $limit: limit
     }
 });
 
