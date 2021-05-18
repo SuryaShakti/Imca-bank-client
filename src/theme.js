@@ -107,8 +107,8 @@ let theme = createMuiTheme({
         lineHeight: '15px',
       },
       '@media (max-width:500px)': {
-        fontSize: 12,
-        lineHeight: '15px',
+        fontSize: 10,
+        lineHeight: '11px',
       },
     },
     subtitle1: {
@@ -177,7 +177,7 @@ theme = {
       contained: {
         height: '50px',
         [theme.breakpoints.down('sm')]: {
-          height: '40px'
+          height: '35px'
         }
       }
     },

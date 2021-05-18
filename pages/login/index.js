@@ -23,7 +23,7 @@ const Index = () => {
 
     const classes = useStyles();
 
-    const [email, setEmail] = useState('');
+    const [customerId, setCustomerId] = useState('');
     const [password, setPassword] = useState('');
     const [captchaCode, setCaptchaCode] = useState('');
     const [writtencaptchaCode, setWrittenCaptchaCode] = useState('');
@@ -35,34 +35,54 @@ const Index = () => {
     useEffect(() => {
         if (user && user.role === 2) {
             Router.replace('/admin/dashboard');
-        }else if(user && user.role === 1){
+        } else if (user && user.role === 1) {
             Router.replace('/accountDetails');
         }
     }, []);
 
-    
-    
+
+    const validate = () => {
+        if (customerId.trim() === '') {
+            enqueueSnackbar('Please Enter User Id', { variant: 'warning' });
+            return false;
+        } else if (password.trim() === '') {
+            enqueueSnackbar('Please Enter password', { variant: 'warning' });
+            return false;
+        } else if (writtencaptchaCode.trim() === '') {
+            enqueueSnackbar('Please Enter captcha code', { variant: 'warning' });
+            return false;
+        } 
+        else if (captchaCode !== writtencaptchaCode) {
+            enqueueSnackbar('Captcha does not match!!', { variant: 'warning' });
+            return false;
+        } else {
+            return true;
+        }
+    };
+
     const handleLogin = () => {
-        setLoading(true);
-        authenticate(email, password)
-            .then((response) => {
-                const { accessToken, user } = response;
-                console.log(accessToken, user);
-                localStorage.setItem('feathers-jwt', accessToken);
-                UserStore.set(() => ({ token: accessToken, user }), 'login');
-                enqueueSnackbar('Login successfully', { variant: 'success' });
-                if (user.role === 2) {
-                    Router.replace('/admin/dashboard');
-                }
-                else {
-                    Router.replace('/accountDetails');
-                }
-            })
-            .catch(error => {
-                enqueueSnackbar(error.message && error.message ? error.message : 'Something went wrong!', { variant: 'warning' });
-            }).finally(() => {
-                setLoading(false);
-            });
+        if (validate()) {
+            setLoading(true);
+            authenticate(customerId, password)
+                .then((response) => {
+                    const { accessToken, user } = response;
+                    console.log(accessToken, user);
+                    localStorage.setItem('feathers-jwt', accessToken);
+                    UserStore.set(() => ({ token: accessToken, user }), 'login');
+                    enqueueSnackbar('Login successfully', { variant: 'success' });
+                    if (user.role === 2) {
+                        Router.replace('/admin/dashboard');
+                    }
+                    else {
+                        Router.replace('/accountDetails');
+                    }
+                })
+                .catch(error => {
+                    enqueueSnackbar(error.message && error.message ? error.message : 'Something went wrong!', { variant: 'error' });
+                }).finally(() => {
+                    setLoading(false);
+                });
+        }
     };
 
 
@@ -106,17 +126,17 @@ const Index = () => {
                             <Box my={1} />
                             <Box width={'100%'} mb={'5px'}>
                                 <Typography variant={'caption'}>
-                                    {'Customer Id'}
+                                    {'User Id'}
                                 </Typography>
                             </Box>
                             <TextField
-                                // label={'Email'}
-                                value={email}
-                                onChange={event => setEmail(event.target.value)}
+                                // label={'customerId'}
+                                value={customerId}
+                                onChange={event => setCustomerId(event.target.value)}
                                 variant="outlined"
                                 fullWidth
                                 style={{ backgroundColor: '#ffffff' }}
-                                
+
                             />
                             <Box my={1} />
                             <Box width={'100%'} mb={'5px'}>
@@ -134,7 +154,7 @@ const Index = () => {
                             />
                             <Box my={1} />
                             <Box display={'flex'} alignItems={'center'}
-                                width={'100%'} justifyContent={{xs: 'center', md:'space-between'}}>
+                                width={'100%'} justifyContent={{ xs: 'center', md: 'space-between' }}>
                                 <Hidden smDown>
                                     <Typography variant={'caption'}>{'Captcha'}</Typography>
                                 </Hidden>

@@ -1,8 +1,8 @@
 import app from './index';
 
-export const authenticate = (email, password) => app.authenticate({
-    strategy: 'email',
-    email,
+export const authenticate = (customerId, password) => app.authenticate({
+    strategy: 'customer',
+    customerId,
     password
 });
 

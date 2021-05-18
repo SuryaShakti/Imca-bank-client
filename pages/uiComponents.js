@@ -1,6 +1,10 @@
 import { Box, Button, Container, Grid, Hidden, TextField, Typography } from "@material-ui/core"
 import React, { useState } from "react";
-import Image1 from '../public/Group 61.svg';
+import Image1 from '../public/online_test (1).svg';
+import Image2 from '../public/g10.svg';
+import Image4 from '../public/instant_analysis.svg';
+import Image3 from '../public/Group 74.svg';
+import AuroWhyUsSignleItem from "../src/components/auroWhyUsSignleItem";
 
 const UiComponents = () => {
 
@@ -81,21 +85,33 @@ const UiComponents = () => {
 
             <Box my={'100px'}></Box>
 
-            <Container maxWidth={'xl'}>
-                <Grid container>
-                    <Grid container justify={'center'} item xs={8} sm={8} direction={'column'} alignItems={'flex-end'}>
-                        <Typography variant={'h3'} color={'primary'}>
-                            {'Balance Enquiry'}
-                        </Typography>
-                        <Typography variant={'caption'}>
-                            {'You can check the available balance of your account, minimum balance that should be always there in your account.'}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4} sm={4} width={'100%'}>
-                        <img width={'80%'} src={Image1} alt={'image1'} />
-                    </Grid>
+            <Container maxWidth={'lg'}>
+                <Grid container component={Box} p={{ xs: '5px', md: '20px' }}>
+                    <AuroWhyUsSignleItem
+                        image={Image1}
+                        title={'Balance Enquiry'}
+                        description={'You can check the available balance of your account, minimum balance that should be always there in your account.'}
+                    />
+                    <AuroWhyUsSignleItem
+                        image={Image2}
+                        title={'Funds Transfer'}
+                        description={'You can transfer money from your account to another account of our bank.'}
+                    />
+                    <AuroWhyUsSignleItem
+                        image={Image3}
+                        title={'Mini Statement'}
+                        description={' You can get your list of transactions you have made in current month.'}
+                    />
+                    <AuroWhyUsSignleItem
+                        image={Image4}
+                        title={'Account Details'}
+                        description={'You Can check your account details such as account type, account number, branch, ifsc code etc'}
+                    />
                 </Grid>
             </Container>
+
+
+            {/* // ^------------------------- Account details Card ------------------------------- */}
 
             <Box my={'100px'} />
 
@@ -655,13 +671,13 @@ const UiComponents = () => {
             </Box>
 
             <Box
-               display={'flex'}
-               justifyContent={'center'}
-               alignItems={'center'}
-               height={'100vh'}
-               p={{ xs: 1, md: 3 }} 
+                display={'flex'}
+                justifyContent={'center'}
+                alignItems={'center'}
+                height={'100vh'}
+                p={{ xs: 1, md: 3 }}
             >
-                
+
             </Box>
 
 

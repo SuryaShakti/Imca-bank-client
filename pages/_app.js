@@ -7,7 +7,8 @@ import theme from '../src/theme';
 import { useRouter } from 'next/router';
 import Loader from '../src/components/Loader';
 import app, { cookieStorage } from '../src/apis/index';
-import {SnackbarProvider} from 'notistack';
+import { SnackbarProvider } from 'notistack';
+import UserStore from '../src/store/UserStore';
 
 
 export default function MyApp(props) {
@@ -25,7 +26,7 @@ export default function MyApp(props) {
     }
 
     const token = localStorage.getItem('feathers-jwt');
-    console.log("token",token);
+    console.log("token", token);
     if (token) {
       app
         .authenticate({
@@ -34,13 +35,19 @@ export default function MyApp(props) {
         })
         .then(response => {
           const { accessToken, user } = response;
-          console.log('app accesstoken',accessToken, user);
+          console.log('app accesstoken', accessToken, user);
           localStorage.setItem('feathers-jwt', accessToken);
           UserStore.set(() => ({ token: accessToken, user }), 'login');
           if (Router.pathname === '/login') {
-            Router.replace('/').then(() => {
-              setLoading(false);
-            });
+            if (user.role === 1) {
+              Router.replace('/accountDetails').then(() => {
+                setLoading(false);
+              });
+            } else {
+              Router.replace('/admin/dashboard').then(() => {
+                setLoading(false);
+              });
+            }
           } else {
             setLoading(false);
           }
@@ -50,7 +57,7 @@ export default function MyApp(props) {
           // app.logout();
           // localStorage.removeItem('feathers-jwt');
           // Router.replace('/').then(() => {
-            setLoading(false);
+          setLoading(false);
           // });
         });
     } else {
