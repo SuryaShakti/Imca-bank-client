@@ -11,3 +11,6 @@ export default function Home() {
     </Box>
   )
 }
+
+Home.Title = 'Home'
+Home.Layout = null

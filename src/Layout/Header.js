@@ -13,8 +13,10 @@ import { useStore } from "laco-react";
 import UserStore from "../store/UserStore";
 import Head from "next/head";
 import Button from "@material-ui/core/Button";
-import { logout } from "../Endpoints/authentication";
+import { logout } from "../apis/authentication";
 import { useRouter } from "next/router";
+import app from '../apis/index';
+
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -42,14 +44,20 @@ function Header(props) {
   const { user } = useStore(UserStore);
   const Router = useRouter();
 
+  const handleLogout = () => {
+    localStorage.removeItem('feathers-jwt');
+    logout();
+    window.location.reload();
+  }
+
   return (
     <React.Fragment>
       <Head>
         <title>
-          {title ? title + " | Utkal Learning Admin" : "Utkal Learning Admin"}
+          {title ? title + " | IMCA Bank" : "IMCA Bank"}
         </title>
       </Head>
-      <AppBar color="primary" position="sticky" elevation={0}>
+      <AppBar color="#ffffff" position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             <Hidden smUp>
@@ -67,9 +75,9 @@ function Header(props) {
             <Grid item xs />
             <Grid item>
               <Button
-                onClick={() => logout().then(()=>window.location.reload(false))}
+                onClick={() => handleLogout()}
                 variant={"outlined"}
-                color={"inherit"}
+                color={"primary"}
               >
                 {"Log Out"}
               </Button>
@@ -80,14 +88,14 @@ function Header(props) {
       <AppBar
         component="div"
         className={classes.secondaryBar}
-        color="primary"
+        color="#ffffff"
         position="static"
-        elevation={0}
+        elevation={2}
       >
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
+              <Typography color="primary" variant="h3">
                 {title ? title : ""}
               </Typography>
             </Grid>

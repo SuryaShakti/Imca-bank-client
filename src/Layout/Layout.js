@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Navigator from './Navigator';
 import Header from './Header';
-import {useStore} from 'laco-react';
+import { useStore } from 'laco-react';
 import UserStore from '../store/UserStore';
-import Loader from './Loader';
-import {useRouter} from 'next/router';
+import Loader from '../components/Loader';
+import { useRouter } from 'next/router';
 
 const drawerWidth = 256;
 
@@ -32,6 +32,10 @@ const useStyle = makeStyles(theme => ({
         flex: 1,
         padding: theme.spacing(6, 4),
         background: '#eaeff1',
+
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(4, 1),
+        }
     },
     footer: {
         padding: theme.spacing(2),
@@ -39,7 +43,7 @@ const useStyle = makeStyles(theme => ({
     },
 }));
 
-function Layout({children, title}) {
+function Layout({ children, title }) {
     const classes = useStyle();
     const Router = useRouter();
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -75,7 +79,7 @@ function Layout({children, title}) {
                 </Hidden>
             </nav>
             <div className={classes.app}>
-                <Header onDrawerToggle={handleDrawerToggle} title={title}/>
+                <Header onDrawerToggle={handleDrawerToggle} title={title} />
                 <main className={classes.main}>
                     {children}
                 </main>

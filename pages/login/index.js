@@ -201,3 +201,6 @@ const Index = () => {
 }
 
 export default Index
+
+Index.title = 'Login'
+Index.Layout = null

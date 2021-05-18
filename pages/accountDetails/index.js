@@ -15,7 +15,7 @@ const Index = () => {
                 display={'flex'}
                 justifyContent={'center'}
                 alignItems={'center'}
-                height={'100vh'}
+                // height={'100vh'}
                 p={{ xs: 1, md: 3 }
                 }
             >
@@ -166,3 +166,5 @@ const Index = () => {
 }
 
 export default Index
+
+Index.title = 'Account Details';

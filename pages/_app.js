@@ -9,11 +9,19 @@ import Loader from '../src/components/Loader';
 import app, { cookieStorage } from '../src/apis/index';
 import { SnackbarProvider } from 'notistack';
 import UserStore from '../src/store/UserStore';
+import DefaultLayout from '../src/Layout/Layout';
 
+const Noop = ({ children }) => children;
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
   const Router = useRouter();
+
+  let Layout = DefaultLayout;
+
+  if (typeof Component.Layout !== 'undefined') {
+    Layout = Component.Layout ? Component.Layout : Noop;
+  }
 
   const [loading, setLoading] = useState(true);
 
@@ -61,14 +69,14 @@ export default function MyApp(props) {
           // });
         });
     } else {
-      // if (Router.pathname !== '/login') {
-      //   Router.replace('/login').then(() => {
-      //     setLoading(false);
-      //   });
-      // } else {
-      //   setLoading(false);
-      // }
-      setLoading(false);
+      if (Router.pathname === '/' || Router.pathname === '/login') {
+        setLoading(false);
+      } else {
+        Router.replace('/login').then(() => {
+          setLoading(false);
+        });
+      }
+      // setLoading(false);
     }
   }, []);
 
@@ -85,7 +93,9 @@ export default function MyApp(props) {
           {
             loading ?
               <Loader /> :
-              <Component {...pageProps} />
+              <Layout title={Component.title ? Component.title : ''}>
+                <Component {...pageProps} />
+              </Layout>
           }
         </SnackbarProvider>
       </ThemeProvider>
