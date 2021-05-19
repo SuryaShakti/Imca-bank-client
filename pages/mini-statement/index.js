@@ -12,11 +12,13 @@ const Index = () => {
             p={{ xs: 1, md: 3 }}
         >
             <Box
+                // style={{ overflowY: 'scroll' }}
                 borderRadius={'borderRadius'}
                 boxShadow={3}
                 width={{ xs: '95%', md: '80%' }}
                 p={{ xs: 1, md: 3 }}
                 bgcolor={'common.white'}
+                // maxHeight={'77vh'}
             >
                 <Box
                     display={'flex'}

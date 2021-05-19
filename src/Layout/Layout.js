@@ -41,6 +41,7 @@ const useStyle = makeStyles(theme => ({
         backgroundImage: `url(${BackImg})`,
         backgroundPosition: 'bottom center',
         backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
         backgroundSize: '100%',
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(4, 1),
