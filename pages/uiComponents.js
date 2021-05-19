@@ -359,7 +359,6 @@ const UiComponents = () => {
                     >
                         {'Send'}
                     </Button>
-
                 </Box>
             </Box>
 
@@ -677,12 +676,11 @@ const UiComponents = () => {
                 height={'100vh'}
                 p={{ xs: 1, md: 3 }}
             >
-
             </Box>
-
-
         </React.Fragment>
     )
 }
 
 export default UiComponents
+
+UiComponents.Layout = null
