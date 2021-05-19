@@ -6,7 +6,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Navigator from './Navigator';
 import Header from './Header';
 import { useStore } from 'laco-react';
-import UserStore from '../store/UserStore';
 import Loader from '../components/Loader';
 import { useRouter } from 'next/router';
 
