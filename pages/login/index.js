@@ -1,7 +1,7 @@
 import { Box, Button, CircularProgress, Container, Grid, Hidden, IconButton, InputAdornment, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useStore } from 'laco-react';
-import UserStore from '../../src/store/UserStore';
+import UserStore from '../../src/store/userStore';
 import { authenticate } from '../../src/apis/authentication';
 import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';

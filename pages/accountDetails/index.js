@@ -9,7 +9,7 @@ const Index = () => {
 
     console.log(user);
 
-    const [accounts, setAccounts] = useState(user.accounts);
+    // const [accounts, setAccounts] = useState(user.accounts);
 
     return (
         user  && user.accounts ?
