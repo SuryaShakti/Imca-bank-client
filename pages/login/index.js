@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Container, Grid, Hidden, makeStyles, TextField, Typography } from '@material-ui/core'
+import { Box, Button, CircularProgress, Container, Grid, Hidden, IconButton, InputAdornment, makeStyles, TextField, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useStore } from 'laco-react';
 import UserStore from '../../src/store/UserStore';
@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import ClientCaptcha from "react-client-captcha";
 import BackImg from '../../public/Vector 44.svg'
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const useStyles = makeStyles({
     conatiner: {
@@ -23,6 +24,7 @@ const Index = () => {
 
     const classes = useStyles();
 
+    const [showPassword, setShowPassword] = useState(false);
     const [customerId, setCustomerId] = useState('');
     const [password, setPassword] = useState('');
     const [captchaCode, setCaptchaCode] = useState('');
@@ -85,6 +87,11 @@ const Index = () => {
         }
     };
 
+    
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+
 
     return (
         <Box className={classes.conatiner}>
@@ -144,13 +151,35 @@ const Index = () => {
                                     {'Password'}
                                 </Typography>
                             </Box>
-                            <TextField
+                            {/* <TextField
                                 // label={'Password'}
                                 value={password}
                                 onChange={event => setPassword(event.target.value)}
                                 variant="outlined"
                                 fullWidth
                                 style={{ backgroundColor: '#ffffff' }}
+                            /> */}
+                            <TextField
+                                fullWidth
+                                style={{ backgroundColor: '#ffffff' }}
+                                value={password}
+                                onChange={event => setPassword(event.target.value)}
+                                variant="outlined"
+                                placeholder={'Password'}
+                                type={showPassword ? "text" : "password"}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
                             />
                             <Box my={1} />
                             <Box display={'flex'} alignItems={'center'}

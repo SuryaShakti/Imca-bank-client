@@ -2,6 +2,7 @@ import { Box, Button, Hidden, Typography } from '@material-ui/core'
 import { useRouter } from 'next/router';
 import React from 'react';
 import Image2 from '../../../../public/g10 (1).svg'
+import FirstImage from '../../../../public/Group 75.svg'
 
 const FirstSection = () => {
 
@@ -10,7 +11,8 @@ const FirstSection = () => {
     return (
         <Box display={'flex'} justifyContent={'center'} alignItems={'center'} p={{ xs: 1, md: 0 }}>
             <Hidden smDown>
-                <Box width={'50%'} height={'100vh'} bgcolor={'primary.main'}>
+                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} width={'50%'} height={'100vh'} bgcolor={'primary.main'}>
+                    <img width={'80%'} src={FirstImage}></img>
                 </Box>
             </Hidden>
             <Box width={{ xs: '100%', md: '50%' }} display={'flex'} justifyContent={'center'} alignItems={'center'}>
