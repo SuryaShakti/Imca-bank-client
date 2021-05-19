@@ -99,6 +99,7 @@ const Index = () => {
                     boxShadow={2}
                     width={'100%'}
                     p={1}
+                    bgcolor={'common.white'}
                 >
                     <Box
                         borderRadius={'borderRadius'}
