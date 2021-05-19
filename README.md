@@ -1,3 +1,3 @@
 # Imca-bank-client
 
-<img src="./public/Group 57.svg" ></img>
+<img src="https://drive.google.com/uc?export=view&id=1wrc8Jb_rZBiXmmGyPCnVWzTUGQMZEI6l" ></img>
