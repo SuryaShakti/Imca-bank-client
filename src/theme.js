@@ -15,6 +15,9 @@ let theme = createMuiTheme({
     background: {
       default: '#ffffff'
     },
+    text:{
+      secondary: '#ffffff'
+    }
   },
   typography: {
     fontFamily: 'poppins',
@@ -29,7 +32,7 @@ let theme = createMuiTheme({
         lineHeight: '40px',
       },
       '@media (max-width:900px)': {
-        fontSize: 24,
+        fontSize: 22,
         lineHeight: '30px',
       },
     },
@@ -68,13 +71,45 @@ let theme = createMuiTheme({
       fontSize: 26,
       letterSpacing: 0.7,
     },
+    h6: {
+      fontWeight: 500,
+      fontSize: 20,
+      letterSpacing: 0.7,
+      '@media (max-width:500px)': {
+        fontSize: 14,
+        lineHeight: '16px',
+      },
+    },
+
     body1: {
       fontSize: 16,
       fontWeight: 'bold',
+      '@media (max-width:1050px)': {
+        fontSize: 15,
+      },
+      '@media (max-width:900px)': {
+        fontSize: 14,
+        lineHeight: '15px',
+      },
+      '@media (max-width:500px)': {
+        fontSize: 12,
+        lineHeight: '15px',
+      },
     },
     body2: {
       fontWeight: 400,
       letterSpacing: '1px',
+      '@media (max-width:1050px)': {
+        fontSize: 15,
+      },
+      '@media (max-width:900px)': {
+        fontSize: 14,
+        lineHeight: '15px',
+      },
+      '@media (max-width:500px)': {
+        fontSize: 10,
+        lineHeight: '11px',
+      },
     },
     subtitle1: {
       fontSize: 18,
@@ -114,10 +149,14 @@ let theme = createMuiTheme({
       fontSize: 12,
       fontWeight: 400,
       letterSpacing: '1px',
+      '@media (max-width:500px)': {
+        fontSize: 10,
+        lineHeight: '15px',
+      },
     }
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 12,
   },
   props: {
     MuiTab: {
@@ -130,6 +169,28 @@ let theme = createMuiTheme({
     },
   },
 });
+
+theme = {
+  ...theme,
+  overrides: {
+    MuiButton: {
+      contained: {
+        height: '50px',
+        [theme.breakpoints.down('sm')]: {
+          height: '35px'
+        }
+      }
+    },
+    MuiInputBase: {
+      input: {
+        height: '10px',
+        [theme.breakpoints.down('sm')]: {
+          height: '1px'
+        }
+      }
+    }
+  }
+}
 
 // theme = {
 //   ...theme,
