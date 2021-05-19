@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography } from '@material-ui/core'
 import { useStore } from 'laco-react'
 import React, { useState } from 'react'
-import UserStore from '../../src/store/UserStore'
+import UserStore from '../../src/store/userStore'
 
 const Index = () => {
 
