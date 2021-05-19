@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import Loader from '../src/components/Loader';
 import app, { cookieStorage } from '../src/apis/index';
 import { SnackbarProvider } from 'notistack';
-import UserStore from '../src/store/UserStore';
+import UserStore from '../src/store/userStore';
 import DefaultLayout from '../src/Layout/Layout';
 
 const Noop = ({ children }) => children;
