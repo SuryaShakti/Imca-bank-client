@@ -11,7 +11,7 @@ import BackImgMob from '../../public/Vector 46.svg'
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     conatiner: {
         backgroundImage: `url(${BackImg})`,
         backgroundPosition: 'bottom center',
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
             backgroundImage: `url(${BackImgMob})`,
         }
     }
-})
+}));
 
 const Index = () => {
 
