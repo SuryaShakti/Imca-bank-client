@@ -10,7 +10,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { useStore } from "laco-react";
-import UserStore from "../store/UserStore";
+import UserStore from "../store/userStore";
 import Head from "next/head";
 import Button from "@material-ui/core/Button";
 import { logout } from "../apis/authentication";
