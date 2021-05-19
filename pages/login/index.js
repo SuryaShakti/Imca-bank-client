@@ -7,6 +7,7 @@ import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
 import ClientCaptcha from "react-client-captcha";
 import BackImg from '../../public/Vector 44.svg'
+import BackImgMob from '../../public/Vector 46.svg'
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
@@ -16,7 +17,10 @@ const useStyles = makeStyles({
         backgroundPosition: 'bottom center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100%',
-        height: '100vh'
+        height: '100vh',
+        [theme.breakpoints.down('xs')]: {
+            backgroundImage: `url(${BackImgMob})`,
+        }
     }
 })
 
@@ -151,21 +155,12 @@ const Index = () => {
                                     {'Password'}
                                 </Typography>
                             </Box>
-                            {/* <TextField
-                                // label={'Password'}
-                                value={password}
-                                onChange={event => setPassword(event.target.value)}
-                                variant="outlined"
-                                fullWidth
-                                style={{ backgroundColor: '#ffffff' }}
-                            /> */}
                             <TextField
                                 fullWidth
                                 style={{ backgroundColor: '#ffffff' }}
                                 value={password}
                                 onChange={event => setPassword(event.target.value)}
                                 variant="outlined"
-                                placeholder={'Password'}
                                 type={showPassword ? "text" : "password"}
                                 InputProps={{
                                     endAdornment: (

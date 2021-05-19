@@ -1,4 +1,5 @@
 import { Avatar, Box, Typography } from '@material-ui/core'
+import { bgcolor } from '@material-ui/system'
 import { useStore } from 'laco-react'
 import React, { useState } from 'react'
 import UserStore from '../../src/store/userStore'
@@ -12,14 +13,14 @@ const Index = () => {
     // const [accounts, setAccounts] = useState(user.accounts);
 
     return (
-        user  && user.accounts ?
+        user && user.accounts ?
             <Box
                 display={'flex'}
                 justifyContent={'center'}
                 alignItems={'center'}
                 // height={'100vh'}
-                p={{ xs: 1, md: 3 }
-                }
+                width={'100%'}
+                p={{ xs: 1, md: 3 }}
             >
                 <Box
                     boxShadow={2}
@@ -28,6 +29,7 @@ const Index = () => {
                     p={{ xs: 1, md: 2 }}
                     display={{ xs: 'block', md: 'flex' }}
                     justifyContent={'space-between'}
+                    bgcolor={'common.white'}
                 >
                     <Box
                         width={{ xs: '100%', md: '48%' }}
@@ -49,7 +51,7 @@ const Index = () => {
                             justifyContent={'center'}
                             alignItems={'center'}
                         >
-                            <Avatar style={{width: '100%', height: '100%'}} src={user.avatar}></Avatar>
+                            <Avatar style={{ width: '100%', height: '100%' }} src={user.avatar}></Avatar>
                         </Box>
                         <Typography variant={'body1'} align={'center'}>
                             {user.name}
@@ -89,6 +91,7 @@ const Index = () => {
                         alignItems={'center'}
                         justifyContent={'space-around'}
                         p={2}
+                        mt={{xs: 2, sm: 0}}
                     >
                         <Box
                             width={{ xs: '100%', md: '80%' }}
