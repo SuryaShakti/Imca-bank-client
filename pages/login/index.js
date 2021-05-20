@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
 import ClientCaptcha from "react-client-captcha";
 import BackImg from '../../public/Vector 44.svg'
-import BackImgMob from '../../public/group80.svg'
+import BackImgMob from '../../public/Group80.svg'
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
