@@ -8,8 +8,8 @@ import Header from './Header';
 import { useStore } from 'laco-react';
 import Loader from '../components/Loader';
 import { useRouter } from 'next/router';
-import BackImg from '../../public/Vector 44.svg'
-import BackImgMob from '../../public/Vector 46.svg'
+import BackImg from '../../public/Group81.svg'
+import BackImgMob from '../../public/Group80.svg'
 
 
 
@@ -39,10 +39,10 @@ const useStyle = makeStyles(theme => ({
         alignItems: 'center',
         background: '#eaeff1',
         backgroundImage: `url(${BackImg})`,
-        backgroundPosition: 'bottom center',
+        backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'fixed',
-        backgroundSize: '100%',
+        backgroundSize: 'cover',
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(4, 1),
             backgroundImage: `url(${BackImgMob})`,
