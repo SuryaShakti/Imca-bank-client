@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
 import ClientCaptcha from "react-client-captcha";
 import BackImg from '../../public/Vector 44.svg'
-import BackImgMob from '../../public/Vector 46.svg'
+import BackImgMob from '../../public/group80.svg'
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
@@ -20,6 +20,8 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         [theme.breakpoints.down('xs')]: {
             backgroundImage: `url(${BackImgMob})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
         }
     }
 }));
@@ -57,7 +59,7 @@ const Index = () => {
         } else if (writtencaptchaCode.trim() === '') {
             enqueueSnackbar('Please Enter captcha code', { variant: 'warning' });
             return false;
-        } 
+        }
         else if (captchaCode !== writtencaptchaCode) {
             enqueueSnackbar('Captcha does not match!!', { variant: 'warning' });
             return false;
@@ -91,7 +93,7 @@ const Index = () => {
         }
     };
 
-    
+
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
@@ -170,7 +172,7 @@ const Index = () => {
                                                 onClick={handleClickShowPassword}
                                                 onMouseDown={handleMouseDownPassword}
                                             >
-                                                {showPassword ? <Visibility/> : <VisibilityOff/>}
+                                                {showPassword ? <Visibility /> : <VisibilityOff />}
                                             </IconButton>
                                         </InputAdornment>
                                     )
