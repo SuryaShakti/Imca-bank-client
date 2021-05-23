@@ -8,10 +8,8 @@ import Header from './Header';
 import { useStore } from 'laco-react';
 import Loader from '../components/Loader';
 import { useRouter } from 'next/router';
-import BackImg from '../../public/Group81.svg'
+import BackImg from '../../public/Vector 44.svg'
 import BackImgMob from '../../public/Group80.svg'
-
-
 
 const drawerWidth = 256;
 
@@ -37,15 +35,17 @@ const useStyle = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: '#eaeff1',
-        backgroundImage: `url(${BackImg})`,
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'cover',
+        background: '#D8D6FF',
+        // backgroundImage: `url(${BackImg})`,
+        // backgroundPosition: 'bottom center',
+        // backgroundRepeat: 'no-repeat',
+        // backgroundAttachment: 'fixed',
+        // backgroundSize: '100%',
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(4, 1),
-            backgroundImage: `url(${BackImgMob})`,
+            // backgroundImage: `url(${BackImgMob})`,
+            // backgroundSize: 'cover',
+            // backgroundPosition: 'center',
         }
     },
     footer: {
