@@ -6,22 +6,35 @@ import { authenticate } from '../../src/apis/authentication';
 import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
 import ClientCaptcha from "react-client-captcha";
-import BackImg from '../../public/Vector 44.svg'
+import BackImg from '../../public/Group80.svg'
 import BackImgMob from '../../public/Group80.svg'
 import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     conatiner: {
-        backgroundImage: `url(${BackImg})`,
-        backgroundPosition: 'bottom center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        // backgroundImage: `url(${BackImg})`,
+        // backgroundPosition: 'bottom center',
+        // backgroundRepeat: 'no-repeat',
+        // backgroundSize: '100%',
+        background: '#D8D6FF',
         height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'cemter',
         [theme.breakpoints.down('xs')]: {
-            backgroundImage: `url(${BackImgMob})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
+            // backgroundImage: `url(${BackImgMob})`,
+            // backgroundPosition: 'center',
+            // backgroundSize: 'cover',
+        }
+    },
+    card: {
+        padding: '50px 20px',
+        borderRadius: '12px',
+        backgroundColor: '#ffffff',
+        [theme.breakpoints.down('xs')]: {
+            padding: '20px 0px',
+            
         }
     }
 }));
@@ -101,8 +114,8 @@ const Index = () => {
 
     return (
         <Box className={classes.conatiner}>
-            <Container maxWidth={'xl'}>
-                <Grid container justify={'center'} alignItems={'center'} style={{ height: '100vh' }}>
+            <Container maxWidth={'lg'}>
+                <Grid className={classes.card} container justify={'center'} alignItems={'center'}>
                     <Hidden smDown>
                         <Grid item container xs={12} sm={6} justify={'center'} alignItems={'center'}>
                             <img width={'80%'} src={Vector} alt={'vector'} />
