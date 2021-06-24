@@ -4,7 +4,7 @@ let theme = createMuiTheme({
   palette: {
     primary: {
       light: '#9D97FF',
-      main: '#6C63FF',
+      main: '#6D52FF',
       dark: '#6157Ff',
     },
     secondary: {
@@ -190,6 +190,11 @@ theme = {
         [theme.breakpoints.down('sm')]: {
           height: '1px'
         }
+      }
+    },
+    MuiCheckbox:{
+      root:{
+        color: '#00000'
       }
     }
   }

@@ -6,27 +6,44 @@ import { authenticate } from '../../src/apis/authentication';
 import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
 import ClientCaptcha from "react-client-captcha";
-import BackImg from '../../public/Group80.svg'
-import BackImgMob from '../../public/Group80.svg'
-import Vector from '../../public/undraw_secure_login_pdn4 1.svg';
+import BackImg from '../../public/Group83.png';
+import Vector from '../../public/Group 84.png';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundImage: `url(${BackImg})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        [theme.breakpoints.down("lg")]: {
+            padding: "0px 120px",
+        },
+        [theme.breakpoints.down("md")]: {
+            padding: "0px 80px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            padding: "0px 60px",
+        },
+        [theme.breakpoints.down("xs")]: {
+            padding: "0px 8px",
+        },
+    },
+    create: {
+        cursor: "pointer",
+        userSelect: "none",
+    },
     conatiner: {
-        // backgroundImage: `url(${BackImg})`,
-        // backgroundPosition: 'bottom center',
-        // backgroundRepeat: 'no-repeat',
-        // backgroundSize: '100%',
         background: '#D8D6FF',
         height: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'cemter',
-        [theme.breakpoints.down('xs')]: {
-            // backgroundImage: `url(${BackImgMob})`,
-            // backgroundPosition: 'center',
-            // backgroundSize: 'cover',
-        }
     },
     card: {
         padding: '50px 20px',
@@ -34,7 +51,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#ffffff',
         [theme.breakpoints.down('xs')]: {
             padding: '20px 0px',
-            
+
         }
     }
 }));
@@ -113,7 +130,7 @@ const Index = () => {
 
 
     return (
-        <Box className={classes.conatiner}>
+        <Box className={classes.root}>
             <Container maxWidth={'lg'}>
                 <Grid className={classes.card} container justify={'center'} alignItems={'center'}>
                     <Hidden smDown>
