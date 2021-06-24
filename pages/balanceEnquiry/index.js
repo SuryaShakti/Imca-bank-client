@@ -1,7 +1,13 @@
 import { Box, Button, Hidden, Typography } from '@material-ui/core'
+import { useStore } from 'laco-react';
 import React from 'react'
+import UserStore from '../../src/store/userStore';
 
 const Index = () => {
+
+    const { user } = useStore(UserStore);
+
+
     return (
         <React.Fragment>
             <Hidden xsDown>
@@ -37,7 +43,7 @@ const Index = () => {
                                 {'Available Amount'}
                             </Typography>
                             <Typography variant={'h1'} color={'textSecondary'}>
-                                {'200000.00'}
+                                {`₹ ${user.accounts[0].balance}.00`}
                             </Typography>
                         </Box>
                         <Box

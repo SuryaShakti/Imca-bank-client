@@ -10,7 +10,10 @@ const Index = () => {
 
     console.log(user);
 
-    // const [accounts, setAccounts] = useState(user.accounts);
+    const [accounts, setAccounts] = useState(user.accounts ? user.accounts : '');
+    const account1 = accounts[0]
+    
+    console.log("accounts",account1);
 
     return (
         user && user.accounts ?
@@ -82,96 +85,104 @@ const Index = () => {
                         </Typography>
                         <Box mb={2} />
                     </Box>
-                    <Box
-                        width={{ xs: '100%', md: '48%' }}
-                        borderRadius={'borderRadius'}
-                        boxShadow={2}
-                        display={'flex'}
-                        flexDirection={'column'}
-                        alignItems={'center'}
-                        justifyContent={'space-around'}
-                        p={2}
-                        mt={{xs: 2, sm: 0}}
-                    >
-                        <Box
-                            width={{ xs: '100%', md: '80%' }}
-                            display={'flex'}
-                            my={1}
-                            justifyContent={'space-between'}
-                        >
-                            <Typography variant={'body1'}>
-                                {'Account Number'}
-                            </Typography>
-                            <Typography variant={'body2'}>
-                                {'263520000202'}
-                            </Typography>
-                        </Box>
-                        <Box
-                            my={1}
-                            width={{ xs: '100%', md: '80%' }}
-                            display={'flex'}
-                            justifyContent={'space-between'}
-                        >
-                            <Typography variant={'body1'}>
-                                {'Account Number'}
-                            </Typography>
-                            <Typography variant={'body2'}>
-                                {'263520000202'}
-                            </Typography>
-                        </Box>
-                        <Box
-                            my={1}
-                            width={{ xs: '100%', md: '80%' }}
-                            display={'flex'}
-                            justifyContent={'space-between'}
-                        >
-                            <Typography variant={'body1'}>
-                                {'Account Number'}
-                            </Typography>
-                            <Typography variant={'body2'}>
-                                {'263520000202'}
-                            </Typography>
-                        </Box>
-                        <Box
-                            my={1}
-                            width={{ xs: '100%', md: '80%' }}
-                            display={'flex'}
-                            justifyContent={'space-between'}
-                        >
-                            <Typography variant={'body1'}>
-                                {'Account Number'}
-                            </Typography>
-                            <Typography variant={'body2'}>
-                                {'263520000202'}
-                            </Typography>
-                        </Box>
-                        <Box
-                            my={1}
-                            width={{ xs: '100%', md: '80%' }}
-                            display={'flex'}
-                            justifyContent={'space-between'}
-                        >
-                            <Typography variant={'body1'}>
-                                {'Account Number'}
-                            </Typography>
-                            <Typography variant={'body2'}>
-                                {'263520000202'}
-                            </Typography>
-                        </Box>
-                        <Box
-                            my={1}
-                            width={{ xs: '100%', md: '80%' }}
-                            display={'flex'}
-                            justifyContent={'space-between'}
-                        >
-                            <Typography variant={'body1'}>
-                                {'Account Number'}
-                            </Typography>
-                            <Typography variant={'body2'}>
-                                {'263520000202'}
-                            </Typography>
-                        </Box>
-                    </Box>
+                    {
+                        accounts.length === 1 ?
+                            <Box
+                                width={{ xs: '100%', md: '48%' }}
+                                borderRadius={'borderRadius'}
+                                boxShadow={2}
+                                display={'flex'}
+                                flexDirection={'column'}
+                                alignItems={'center'}
+                                justifyContent={'space-around'}
+                                p={2}
+                                mt={{ xs: 2, sm: 0 }}
+                            >
+                                <Box
+                                    width={{ xs: '100%', md: '80%' }}
+                                    display={'flex'}
+                                    my={1}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography variant={'body1'}>
+                                        {'Account Number'}
+                                    </Typography>
+                                    <Typography variant={'body2'}>
+                                        {account1.accountNumber}
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    my={1}
+                                    width={{ xs: '100%', md: '80%' }}
+                                    display={'flex'}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography variant={'body1'}>
+                                        {'Account Type'}
+                                    </Typography>
+                                    <Typography variant={'body2'}>
+                                        {account1.accountType === 2 ? 'Savings' : 'Current'}
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    my={1}
+                                    width={{ xs: '100%', md: '80%' }}
+                                    display={'flex'}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography variant={'body1'}>
+                                        {'Account Number'}
+                                    </Typography>
+                                    <Typography variant={'body2'}>
+                                        {'263520000202'}
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    my={1}
+                                    width={{ xs: '100%', md: '80%' }}
+                                    display={'flex'}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography variant={'body1'}>
+                                        {'Account Number'}
+                                    </Typography>
+                                    <Typography variant={'body2'}>
+                                        {'263520000202'}
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    my={1}
+                                    width={{ xs: '100%', md: '80%' }}
+                                    display={'flex'}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography variant={'body1'}>
+                                        {'Account Number'}
+                                    </Typography>
+                                    <Typography variant={'body2'}>
+                                        {'263520000202'}
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    my={1}
+                                    width={{ xs: '100%', md: '80%' }}
+                                    display={'flex'}
+                                    justifyContent={'space-between'}
+                                >
+                                    <Typography variant={'body1'}>
+                                        {'Account Number'}
+                                    </Typography>
+                                    <Typography variant={'body2'}>
+                                        {'263520000202'}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                            :
+                            <Box>
+                                select account
+                            </Box>
+
+                    }
                 </Box>
             </Box >
             : null
