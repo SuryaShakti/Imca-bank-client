@@ -12,11 +12,6 @@ const Auro = () => {
                     <AuroWhyUsSignleItem />
                     <AuroWhyUsSignleItem />
                 </Grid>
-                <h1>abhay</h1>
-                <h2>abhay</h2>
-                <h3>abhay</h3>
-                <h4>abhay</h4>
-                <h5>abhay</h5>
             </Container>
         </div>
     )

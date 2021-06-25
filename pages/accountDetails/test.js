@@ -43,14 +43,13 @@ const Index = () => {
         console.log(typeof selectedChip);
         localStorage.setItem('selectedAccount', selectedChip);
         SelectedAccountStore.set(() => ({ account: selectedChip }), 'account');
-		window.location.reload();
         setOpen(false);
     };
 
     return (
         <React.Fragment>
             {
-                user && user.accounts && accountToDisplay ?
+                user && user.accounts ?
                     <Box
                         display={'flex'}
                         justifyContent={'center'}
@@ -277,4 +276,4 @@ const Index = () => {
 
 export default Index
 
-Index.title = 'Account Details';
+Index.title = 'Account Details Test';

@@ -15,7 +15,7 @@ let theme = createMuiTheme({
     background: {
       default: '#ffffff'
     },
-    text:{
+    text: {
       secondary: '#ffffff'
     }
   },
@@ -174,7 +174,7 @@ theme = {
   ...theme,
   overrides: {
     MuiButton: {
-      label:{ 
+      label: {
         textTransform: 'none'
       },
       contained: {
@@ -192,9 +192,18 @@ theme = {
         }
       }
     },
-    MuiCheckbox:{
-      root:{
+    MuiCheckbox: {
+      root: {
         color: '#00000'
+      }
+    },
+    MuiChip: {
+      clickableColorPrimary: {
+        '&:focus': {
+          color: theme.palette.primary.main,
+          backgroundColor: '#ffffff',
+          border: `1px solid ${theme.palette.primary.main}`
+        }
       }
     }
   }
