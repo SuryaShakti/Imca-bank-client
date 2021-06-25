@@ -10,6 +10,7 @@ import app, { cookieStorage } from '../src/apis/index';
 import { SnackbarProvider } from 'notistack';
 import UserStore from '../src/store/userStore';
 import DefaultLayout from '../src/Layout/Layout';
+import SelectedAccountStore from '../src/store/selectedAccountStore';
 
 const Noop = ({ children }) => children;
 
@@ -27,14 +28,14 @@ export default function MyApp(props) {
 
   React.useEffect(() => {
     console.log('app useEffect caleled');
-    // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
 
     const token = localStorage.getItem('feathers-jwt');
-    console.log("token", token);
+    const selecteAccount = localStorage.getItem('selectedAccount');
+    console.log("selected account", selecteAccount);
     if (token) {
       app
         .authenticate({
@@ -46,6 +47,7 @@ export default function MyApp(props) {
           console.log('app accesstoken', accessToken, user);
           localStorage.setItem('feathers-jwt', accessToken);
           UserStore.set(() => ({ token: accessToken, user }), 'login');
+          SelectedAccountStore.set(() => ({ account: selecteAccount }), 'account');
           if (Router.pathname === '/login') {
             if (user.role === 1) {
               Router.replace('/accountDetails').then(() => {

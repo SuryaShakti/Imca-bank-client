@@ -83,6 +83,9 @@ const Index = () => {
         if (customerId.trim() === '') {
             enqueueSnackbar('Please Enter User Id', { variant: 'warning' });
             return false;
+        } else if (customerId.length !== 8) {
+            enqueueSnackbar('Please Enter a valid User Id', { variant: 'warning' });
+            return false;
         } else if (password.trim() === '') {
             enqueueSnackbar('Please Enter password', { variant: 'warning' });
             return false;

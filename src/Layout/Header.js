@@ -21,6 +21,8 @@ import { Chip } from "@material-ui/core";
 import Popover from '@material-ui/core/Popover';
 import { useState } from "react";
 import {Dialog} from "@material-ui/core";
+import WelcomeImage from '../../public/Group86.svg';
+import SelectedAccountStore from '../store/selectedAccountStore';
 
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
@@ -48,6 +50,10 @@ function Header(props) {
 	const { classes, onDrawerToggle, title } = props;
 	const { user } = useStore(UserStore);
 	const Router = useRouter();
+    const { account } = useStore(SelectedAccountStore);
+    const [selectedChip, setSelectedChip] = useState();
+
+    const [accounts, setAccounts] = useState(user.accounts ? user.accounts : '');
 
 	const [openSwitchAccount,setOpenSwitchAccount] = useState(false);
 
@@ -55,6 +61,7 @@ function Header(props) {
 
 	const handleLogout = () => {
 		localStorage.removeItem('feathers-jwt');
+		localStorage.removeItem('selectedAccount');
 		logout();
 		window.location.reload();
 	}
@@ -72,6 +79,18 @@ function Header(props) {
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 
+
+    const selectAccountHandler = (acc) => {
+        setSelectedChip(acc);
+    };
+
+    const saveHandler = () => {
+        console.log(typeof selectedChip);
+        localStorage.setItem('selectedAccount', selectedChip);
+        SelectedAccountStore.set(() => ({ account: selectedChip }), 'account');
+		window.location.reload();
+        setOpenSwitchAccount(false);
+    };
 
 	return (
 		<React.Fragment>
@@ -157,8 +176,64 @@ function Header(props) {
 				</Toolbar>
 			</AppBar>
 
-			<Dialog open={openSwitchAccount} onClose={() => setOpenSwitchAccount(false)}>
-				\
+			<Dialog fullScreen open={openSwitchAccount}>
+			<Box
+                    width={'100%'}
+                    height={'100%'}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                >
+                    <Box
+                        display={'flex'}
+                        justifyContent={'center'}
+                        flexDirection={'column'}
+                        alignItems={'center'}
+                        maxWidth={'500px'}
+                    >
+                        <img src={WelcomeImage} width={'80%'} />
+                        <Box my={4} />
+                        <Box
+                            width={'80%'}
+                        >
+                            <Typography variant={'body2'}>
+                                {`Hi, `}<span><strong>{user.name}</strong></span>
+                                <br />
+                                {`You have ${accounts.length} accounts in our bank.`}
+                                {' Please select one account to continue...'}
+                            </Typography>
+                        </Box>
+                        <Box
+                            width={'80%'}
+                            display={{ xs: 'block', sm: 'flex', }}
+                            justifyContent={'space-around'}
+                            my={3}
+                        >
+                            {
+                                accounts.map(item => (
+                                    <Chip
+                                        color={'primary'}
+                                        onClick={() => selectAccountHandler(item.accountNumber)}
+                                        style={{ padding: '5px', height: '50px' }}
+                                        label={
+                                            <Typography variant={'caption'}>
+                                                {item.accountType === 1 ? 'Savings' : 'Current'}
+                                                <br />
+                                                {`xxxx xxxx xxxx ${item.accountNumber.slice(11)}`}
+                                            </Typography>
+                                        }
+                                    />
+                                ))
+                            }
+                        </Box>
+                        <Box display={'flex'} justifyContent={'center'} my={3}>
+                            <Button color={'primary'} variant={'contained'} disabled={!selectedChip}
+                                onClick={() => saveHandler()}>
+                                {'Save & Continue'}
+                            </Button>
+                        </Box>
+                    </Box>
+                </Box>
 			</Dialog>
 		</React.Fragment>
 	);
