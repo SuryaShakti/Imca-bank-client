@@ -1,7 +1,35 @@
-import { Box, Button, TextField, Typography } from '@material-ui/core'
-import React from 'react'
+import {Box, Button, Dialog, TextField, Typography} from '@material-ui/core'
+import React, {useState} from 'react'
+import {useSnackbar} from "notistack";
+import Done from '../../public/mail.svg';
 
 const Index = () => {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [open, setOpen] = useState(false);
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    const saveHandler = () => {
+        if(name.trim() === ''){
+            enqueueSnackbar('Please Enter Name', { variant: 'warning' });
+            return false;
+        }else if(email.trim() === ''){
+            enqueueSnackbar('Please Enter Email', { variant: 'warning' });
+            return false;
+        }else if(phone.trim() === ''){
+            enqueueSnackbar('Please Enter Phone', { variant: 'warning' });
+            return false;
+        } else {
+            setOpen(true);
+            setName('');
+            setEmail('');
+            setPhone('');
+        }
+    }
+
     return (
         <Box
             display={'flex'}
@@ -31,8 +59,8 @@ const Index = () => {
                 </Box>
                 <TextField
                     // label={'Email'}
-                    // value={accountNumber}
-                    // onChange={event => setAccountNumber(event.target.value)}
+                    value={name}
+                    onChange={event => setName(event.target.value)}
                     variant="outlined"
                     fullWidth
                     style={{ backgroundColor: '#ffffff' }}
@@ -46,8 +74,8 @@ const Index = () => {
                 </Box>
                 <TextField
                     // label={'Email'}
-                    // value={accountNumber}
-                    // onChange={event => setAccountNumber(event.target.value)}
+                    value={email}
+                    onChange={event => setEmail(event.target.value)}
                     variant="outlined"
                     fullWidth
                     style={{ backgroundColor: '#ffffff' }}
@@ -61,8 +89,8 @@ const Index = () => {
                 </Box>
                 <TextField
                     // label={'Email'}
-                    // value={accountNumber}
-                    // onChange={event => setAccountNumber(event.target.value)}
+                    value={phone}
+                    onChange={event => setPhone(event.target.value)}
                     variant="outlined"
                     fullWidth
                     style={{ backgroundColor: '#ffffff' }}
@@ -73,10 +101,36 @@ const Index = () => {
                     variant={'contained'}
                     color={'primary'}
                     fullWidth
+                    onClick={() => saveHandler()}
                 >
                     {'Update'}
                 </Button>
             </Box>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+                <Box
+                    p={2}
+                    display={'flex'}
+                    alignItems={'center'}
+                    justifyContent={'center'}
+                    flexDirection={'column'}
+                >
+                    <img src={Done}  alt={'Done'} width={'300px'} />
+                    <Box my={2}></Box>
+                    <Typography
+                        variant={'h3'}
+                        color={'primary'}
+                    >
+                        {'Your request has been recorded.'}
+                    </Typography>
+                    <Typography
+                        variant={'body2'}
+                        color={'primary'}
+                        align={'center'}
+                    >
+                        {'We will get back to you within 48 working hours.'}
+                    </Typography>
+                </Box>
+            </Dialog>
         </Box>
     )
 }
