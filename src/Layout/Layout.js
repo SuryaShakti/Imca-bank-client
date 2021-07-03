@@ -10,6 +10,7 @@ import Loader from '../components/Loader';
 import { useRouter } from 'next/router';
 import BackImg from '../../public/Vector 44.svg'
 import BackImgMob from '../../public/Group80.svg'
+import UserStore from "../store/userStore";
 
 const drawerWidth = 256;
 
@@ -36,16 +37,8 @@ const useStyle = makeStyles(theme => ({
         justifyContent: 'center',
         alignItems: 'center',
         background: '#D8D6FF',
-        // backgroundImage: `url(${BackImg})`,
-        // backgroundPosition: 'bottom center',
-        // backgroundRepeat: 'no-repeat',
-        // backgroundAttachment: 'fixed',
-        // backgroundSize: '100%',
         [theme.breakpoints.down('xs')]: {
             padding: theme.spacing(4, 1),
-            // backgroundImage: `url(${BackImgMob})`,
-            // backgroundSize: 'cover',
-            // backgroundPosition: 'center',
         }
     },
     footer: {
@@ -63,8 +56,9 @@ function Layout({ children, title }) {
         setMobileOpen(!mobileOpen);
     };
 
-    // const {user} = useStore(UserStore);
-    //
+    const {user} = useStore(UserStore);
+
+
     // useEffect(() => {
     //     if (!user) {
     //         Router.push('/login');
@@ -76,19 +70,22 @@ function Layout({ children, title }) {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <nav className={classes.drawer}>
-                <Hidden smUp implementation="js">
-                    <Navigator
-                        PaperProps={{ style: { width: drawerWidth } }}
-                        variant="temporary"
-                        open={mobileOpen}
-                        onClose={handleDrawerToggle}
-                    />
-                </Hidden>
-                <Hidden xsDown implementation="css">
-                    <Navigator PaperProps={{ style: { width: drawerWidth } }} />
-                </Hidden>
-            </nav>
+            {
+                user.role === 1 ?
+                <nav className={classes.drawer}>
+                    <Hidden smUp implementation="js">
+                        <Navigator
+                            PaperProps={{ style: { width: drawerWidth } }}
+                            variant="temporary"
+                            open={mobileOpen}
+                            onClose={handleDrawerToggle}
+                        />
+                    </Hidden>
+                    <Hidden xsDown implementation="css">
+                        <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+                    </Hidden>
+                </nav> : null
+            }
             <div className={classes.app}>
                 <Header onDrawerToggle={handleDrawerToggle} title={title} />
                 <main className={classes.main}>

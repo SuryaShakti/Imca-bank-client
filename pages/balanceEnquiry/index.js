@@ -1,11 +1,14 @@
 import { Box, Button, Hidden, Typography } from '@material-ui/core'
 import { useStore } from 'laco-react';
-import React from 'react'
+import React, {useState} from 'react'
 import UserStore from '../../src/store/userStore';
+import SelectedAccountStore from "../../src/store/selectedAccountStore";
 
 const Index = () => {
 
     const { user } = useStore(UserStore);
+    const { account } = useStore(SelectedAccountStore);
+    const [accountToDisplay, setAccountToDisplay] = useState(account ? user.accounts.filter(item => item.accountNumber == account)[0] : null);
 
 
     return (
@@ -43,7 +46,7 @@ const Index = () => {
                                 {'Available Amount'}
                             </Typography>
                             <Typography variant={'h1'} color={'textSecondary'}>
-                                {`₹ ${user.accounts[0].balance}.00`}
+                                {`₹ ${accountToDisplay.balance}.00`}
                             </Typography>
                         </Box>
                         <Box

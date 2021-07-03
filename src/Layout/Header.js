@@ -210,7 +210,7 @@ function Header(props) {
                             my={3}
                         >
                             {
-                                accounts.map(item => (
+                                accounts.length > 1 && accounts.map(item => (
                                     <Chip
                                         color={'primary'}
                                         onClick={() => selectAccountHandler(item.accountNumber)}
