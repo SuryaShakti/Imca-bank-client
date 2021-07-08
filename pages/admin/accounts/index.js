@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PageHeaderComponent from "../../../src/components/AdminComponents/PageHeaderComponent";
-import {getAllAccounts} from "../../../src/apis/accounts";
+import {createAccount, getAllAccounts} from "../../../src/apis/accounts";
 import {
     Box,
     CircularProgress,
@@ -16,6 +16,8 @@ import {makeStyles} from "@material-ui/styles";
 import AccountRow from "../../../src/components/AdminComponents/AccountRow";
 import {Pagination} from "@material-ui/lab";
 import CreateAccountDialog from "../../../src/components/AdminComponents/CreateAcount/CreateAccountDialog";
+import {useStore} from "laco-react";
+import UserStore from "../../../src/store/userStore";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -40,8 +42,25 @@ const Index = () => {
     const [pageRows, setPageRows] = useState([]);
     const [allData, setAllData] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [accountType, setAccountType] = useState(0);
+    const [ifsc, setIfsc] = useState('');
+    const [branch, setBranch] = useState('');
+    const [nomineeName, setNomineeName] = useState('');
+    const [balance, setBalance] = useState('');
+    const [user, setUser] = useState({});
+    const [creating, setCreating] = useState('');
 
     const { enqueueSnackbar } = useSnackbar();
+
+    const handleClose = () => {
+        setOpenCreate(false);
+        setUser({});
+        setAccountType(0);
+        setBranch('');
+        setIfsc('');
+        setNomineeName('');
+        setBalance('');
+    };
 
     useEffect(() => {
         setLoading(true);
@@ -95,7 +114,58 @@ const Index = () => {
             .finally(() => setLoading(false));
     };
 
+    const  validate = () => {
+        if (!user) {
+            enqueueSnackbar('Please select user.', { variant: 'warning' });
+            return false;
+        } else if (!accountType){
+            enqueueSnackbar("Please select account type.", { variant: 'warning' });
+            return false;
+        }
+        else if (ifsc.trim() === ''){
+            enqueueSnackbar("Please Enter Ifsc code.", { variant: 'warning' });
+            return false;
+        }
+        else if (branch.trim() === ''){
+            enqueueSnackbar("Please Enter branch.", { variant: 'warning' });
+            return false;
+        }
+        else if (nomineeName.trim() === ''){
+            enqueueSnackbar("Please Enter nominee name", { variant: 'warning' });
+            return false;
+        }
+        else if (balance.trim() === ''){
+            enqueueSnackbar("Please Enter available balance.", { variant: 'warning' });
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    const saveHandler = () => {
+        console.log('---****----', user);
+        if(validate){
+            setCreating(true);
+            createAccount(user._id, accountType, ifsc, branch,  nomineeName, balance)
+                .then((res) => {
+                    let _rows = pageRows;
+                    _rows.push(res);
+                    setPageRows(_rows);
+                    setUser({});
+                    setAccountType(0);
+                    setIfsc('');
+                    setBranch('');
+                    setNomineeName('');
+                    setBalance('');
+                    enqueueSnackbar('Account Created Successfully', {variant: 'success'});
+                })
+                .catch((e) => enqueueSnackbar(e.message ? e.message: 'Something Went Wrong', { variant: 'warning' }))
+                .finally(() => {
+                    setCreating(false);
+                    setOpenCreate(false);
+                });
+        }
+    }
 
     return (
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
@@ -187,11 +257,25 @@ const Index = () => {
                 </TableContainer>
             </Box>
             <CreateAccountDialog
-
+                show={openCreate}
+                dismiss={handleClose}
+                accountType={accountType}
+                ifsc={ifsc}
+                branch={branch}
+                nomineeName={nomineeName}
+                balance={balance}
+                setUser={setUser}
+                setAccountType={setAccountType}
+                setIfsc={setIfsc}
+                setBranch={setBranch}
+                setNomineeName={setNomineeName}
+                setBalance={setBalance}
+                saveClick={saveHandler}
+                creating={creating}
             />
         </Box>
     );
-};
+}
 
 export default Index;
 

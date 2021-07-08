@@ -120,6 +120,13 @@ function Header(props) {
 							</Grid>
 						</Hidden>
 						<Grid item xs />
+						{/*{*/}
+						{/*	user.role && user.role === 2 ? */}
+						{/*	<Box>*/}
+						{/*		*/}
+						{/*	</Box>*/}
+						{/*	: null	*/}
+						{/*}*/}
 						<Grid item>
 							<Box>
 								<Chip onClick={handleClick} aria-describedby={id} 
@@ -144,17 +151,56 @@ function Header(props) {
 										display={'flex'}
 										flexDirection={'column'}
 									>
+										{
+											user.role && user.role === 2 ?
+												<Button
+													onClick={() => Router.push('/admin/dashboard')}
+													color={"primary"}
+												>
+													{"Dashboard"}
+												</Button> : null
+										}
+										{
+											user.role && user.role === 2 ?
+												<Button
+													onClick={() => Router.push('/admin/users')}
+													color={"primary"}
+												>
+													{"All Users"}
+												</Button> : null
+										}
+										{
+											user.role && user.role === 1 ?
+												<Button
+													onClick={() => setOpenSwitchAccount(true)}
+													color={"primary"}
+												>
+													{"Switch Account"}
+												</Button> : null
+										}
+										{
+											user.role && user.role === 2 ?
+												<Button
+													onClick={() => Router.push('/admin/accounts')}
+													color={"primary"}
+												>
+													{"All Accounts"}
+												</Button> : null
+										}
+										{
+											user.role && user.role === 2 ?
+												<Button
+													onClick={() => Router.push('/admin/transactions')}
+													color={"primary"}
+												>
+													{"All Transactions"}
+												</Button> : null
+										}
 										<Button
 											onClick={() => handleLogout()}
 											color={"primary"}
 										>
 											{"Log Out"}
-										</Button>
-										<Button
-											onClick={() => setOpenSwitchAccount(true)}
-											color={"primary"}
-										>
-											{"Switch Accout"}
 										</Button>
 									</Box>
 								</Popover>

@@ -15,14 +15,18 @@ export const getAllAccounts = (skip = 0, limit, search) => AccountService.find({
     }
 });
 
-export const createAccount = (user, accountType, ifscCode, branch,  nomineeName, balance) =>
+export const createAccount = (user, accountType, ifsc, branch,  nomineeName, balance) =>
     AccountService.create({
         user,
         accountType,
-        ifscCode,
+        ifsc,
         branch,
         nomineeName,
         balance
+    },{
+        query:{
+            $populate: 'user'
+        }
     });
 
 export const deleteAccount = (id) => AccountService.remove(id);

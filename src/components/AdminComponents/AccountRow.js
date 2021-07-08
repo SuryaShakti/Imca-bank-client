@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {useSnackbar} from "notistack";
-import {Box, Button, Fade, Menu, MenuItem, TableCell, TableRow, Typography} from "@material-ui/core";
-import {MoreHoriz} from "@material-ui/icons";
+import { IconButton, TableCell, TableRow} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 import {withStyles} from "@material-ui/styles";
+import ConfirmDialog from "../confirm/ConfirmDialog";
+import {deleteAccount} from "../../apis/accounts";
 
 const StyledTableRow = withStyles((theme) => ({
     root: {
@@ -12,24 +14,21 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-const AccountRow = ({ each, i, pageLimit, page, deleteCallback, editCallback }) => {
+const AccountRow = ({ each, i, pageLimit, page, deleteCallback }) => {
 
     const { enqueueSnackbar } = useSnackbar();
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
 
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
+    const deleteHandler = () => {
+        deleteAccount(each._id)
+            .then((res) => {
+                deleteCallback(res);
+                enqueueSnackbar('Account removed successfully.', { variant: 'success' });
+            }).catch((e) => {
+            enqueueSnackbar(e.message ? e.message : "Can't Delete", { variant: 'error' });
+        })
+    }
 
     return (
         <>
@@ -40,83 +39,29 @@ const AccountRow = ({ each, i, pageLimit, page, deleteCallback, editCallback }) 
                 <TableCell align="center">{each && each.accountType === 1 ? 'Savings' : 'Current'}</TableCell>
                 <TableCell align="center">{each.balance ? each.balance : 'N/A'}</TableCell>
                 <TableCell align="center">{each.branch ? each.branch : 'N/A'}</TableCell>
-                {/*<TableCell align="center">*/}
-                {/*    <Button*/}
-                {/*        color={'primary'}*/}
-                {/*        aria-controls="fade-menu"*/}
-                {/*        aria-haspopup="true"*/}
-                {/*        onClick={() => clickHandler()}*/}
-                {/*    >*/}
-                {/*        <Typography variant={'button'}>*/}
-                {/*            <Translate>{'view'}</Translate>*/}
-                {/*        </Typography>*/}
-                {/*    </Button>*/}
-                {/*</TableCell>*/}
-                {/*<TableCell align="center">*/}
-                {/*    <Switch*/}
-                {/*        checked={status === 1 ? true : false}*/}
-                {/*        onChange={handleSwitchChange}*/}
-                {/*        color="primary"*/}
-                {/*        name="checkedB"*/}
-                {/*        inputProps={{ 'aria-label': 'primary checkbox' }}*/}
-                {/*    />*/}
-                {/*</TableCell>*/}
-                <TableCell align="right">
-                    <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
-                        <MoreHoriz />
-                    </Button>
-                </TableCell>
-            </StyledTableRow>
-            <Menu
-                id="fade-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}
-            >
-                <Box p={1}>
-                    <MenuItem
-                        component={Box}
-                        display={'flex'}
-                        justifyContent={'center'}
-                        // onClick={() => {
-                        //     setOpenEdit(true);
-                        //     setAnchorEl(null);
-                        // }}
-                    >
-                        <Typography align={'center'} component={Box} px={3}>
-                            {'View'}
-                        </Typography>
-                    </MenuItem>
-                    <MenuItem
-                        component={Box}
-                        display={'flex'}
-                        justifyContent={'center'}
-                        onClick={() => {
-                            setOpenEdit(true);
-                            setAnchorEl(null);
-                        }}
-                    >
-                        <Typography align={'center'} component={Box} px={3}>
-                            {'edit'}
-                        </Typography>
-                    </MenuItem>
-                    <MenuItem
-                        component={Box}
-                        display={'flex'}
-                        justifyContent={'center'}
+                <TableCell align={'center'}>
+                    <IconButton
                         onClick={() => {
                             setOpenDelete(true);
                             setAnchorEl(null);
                         }}
                     >
-                        <Typography align={'center'} component={Box} px={3}>
-                            {'delete'}
-                        </Typography>
-                    </MenuItem>
-                </Box>
-            </Menu>
+                        <Delete />
+                    </IconButton>
+                </TableCell>
+            </StyledTableRow>
+            <ConfirmDialog
+                show={openDelete}
+                dismiss={() => setOpenDelete(false)}
+                title={'Are You Sure To Delete'}
+                confirmation={'Sure'}
+                content={`Delete ${each.accountNumber} account.`}
+                cancel={() => setOpenDelete(false)}
+                proceed={() => deleteHandler()}
+                okLabel={'ok'}
+                cancelLabel={'cancel'}
+            />
+
         </>
     );
 };
