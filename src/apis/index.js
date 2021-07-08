@@ -6,8 +6,8 @@ import Axios from 'axios';
 
 export const cookieStorage = new CookieStorage();
 
-// const restClient = rest('http://localhost:3030');
-const restClient = rest('https://imca-bank-server.herokuapp.com');
+const restClient = rest('http://localhost:3030');
+// const restClient = rest('https://imca-bank-server.herokuapp.com');
 
 const app = feathers();
 

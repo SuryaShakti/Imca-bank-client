@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import PageHeaderComponent from "../../../src/components/AdminComponents/PageHeaderComponent";
-import {getAllAccounts} from "../../../src/apis/accounts";
 import {
     Box,
     CircularProgress,
@@ -12,10 +11,12 @@ import {
     TableRow
 } from "@material-ui/core";
 import {useSnackbar} from "notistack";
-import {makeStyles} from "@material-ui/styles";
-import AccountRow from "../../../src/components/AdminComponents/AccountRow";
+import {makeStyles, withStyles} from "@material-ui/styles";
+import {getAllUsers, CreateUser} from "../../../src/apis/users";
+import UserRow from "../../../src/components/AdminComponents/UserRow";
 import {Pagination} from "@material-ui/lab";
-import CreateAccountDialog from "../../../src/components/AdminComponents/CreateAcount/CreateAccountDialog";
+import {uploadFile} from "../../../src/apis/upload";
+import CreateUserDialog from '../../../src/components/AdminComponents/CreateUser/CreateUser';
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -24,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
-
 
 const Index = () => {
 
@@ -40,12 +40,38 @@ const Index = () => {
     const [pageRows, setPageRows] = useState([]);
     const [allData, setAllData] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [image, setImage] = useState('');
+    const [imageFile, setImageFile] = useState('');
+    const [src, setSrc] = useState();
+    const [creating, setCreating] = useState(false);
+    const [value, setValue] = useState('');
+    const [shortName, setShortName] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [dob, setDob] = useState(new Date().toISOString().slice(0, 10));
+    const [aadhar, setAdhaar] = useState('');
+    const [gender, setGender] = useState(1);
+    const [password, setPassword] = useState('');
 
     const { enqueueSnackbar } = useSnackbar();
 
+    const dataURLtoFile = (dataurl, filename) => {
+        let arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    };
+
     useEffect(() => {
         setLoading(true);
-        getAllAccounts(0, pageLimit, search ? search : '')
+        getAllUsers(0, pageLimit, search ? search : '')
             .then((res) => {
                 setTotal(res.total);
                 setAllData(res.data);
@@ -61,6 +87,75 @@ const Index = () => {
                 setLoading(false);
             });
     },[search]);
+
+    const validate = () => {
+        if (!imageFile) {
+            enqueueSnackbar('Please select an image.', { variant: 'warning' });
+            return false;
+        } else if (name.trim() === ''){
+            enqueueSnackbar("Please Enter user's name.", { variant: 'warning' });
+            return false;
+        }
+        else if (email.trim() === ''){
+            enqueueSnackbar("Please Enter user's email.", { variant: 'warning' });
+            return false;
+        }
+        else if (phone.trim() === ''){
+            enqueueSnackbar("Please Enter user's phone number.", { variant: 'warning' });
+            return false;
+        }
+        else if (address.trim() === ''){
+            enqueueSnackbar("Please Enter user's address.", { variant: 'warning' });
+            return false;
+        }
+        else if (dob.trim() === ''){
+            enqueueSnackbar("Please Enter user's Date of birth.", { variant: 'warning' });
+            return false;
+        }
+        else if (aadhar.trim() === ''){
+            enqueueSnackbar("Please Enter user's aadhar number.", { variant: 'warning' });
+            return false;
+        }
+        else if (!gender){
+            enqueueSnackbar("Please select user's gender.", { variant: 'warning' });
+            return false;
+        }
+        else if (password.trim() === ''){
+            enqueueSnackbar("Please Enter password to be assigned to the user.", { variant: 'warning' });
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    const handleCreate = () => {
+        if (validate()) {
+            setCreating(true);
+            uploadFile(imageFile).then((response) => {
+                CreateUser(name, phone, email, dob, address, aadhar, response.file, gender, password)
+                    .then((res) => {
+                        let _rows = pageRows;
+                        _rows.push(res);
+                        setPageRows(_rows);
+                        setName('');
+                        setPhone('');
+                        setEmail('');
+                        setAddress('');
+                        setAdhaar('');
+                        setGender(1);
+                        setDob('');
+                        setPassword('');
+                        enqueueSnackbar('User Created Successfully', {variant: 'success'});
+                    })
+                    .catch((e) => enqueueSnackbar(e.message ? e.message: 'Something Went Wrong', { variant: 'warning' }))
+                    .finally(() => {
+                        setCreating(false);
+                        setOpenCreate(false);
+                    });
+            });
+        }
+    };
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -81,7 +176,7 @@ const Index = () => {
 
     const loadData = (skip) => {
         setLoading(true);
-        getAllAccounts(skip, pageLimit, search ? search : '')
+        getAllUsers(skip, pageLimit, search ? search : '')
             .then((response) => {
                 if (response.data) {
                     setPageRows(response.data);
@@ -95,13 +190,19 @@ const Index = () => {
             .finally(() => setLoading(false));
     };
 
-
+    const handleClose = () => {
+        setOpenCreate(false);
+        setValue('');
+        setShortName('');
+        setSrc(null);
+        setImage(null);
+    };
 
     return (
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
             <PageHeaderComponent
-                title={'All Accounts'}
-                addButtonText={'Create Account'}
+                title={'All Users'}
+                addButtonText={'Create User'}
                 value={search}
                 setSearch={setSearch}
                 onChange={(e) => {
@@ -121,19 +222,19 @@ const Index = () => {
                                     <strong>{'Sl No.'}</strong>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <strong>{'Account Number'}</strong>
+                                    <strong>{'Avatar'}</strong>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <strong>{'Account Holder'}</strong>
+                                    <strong>{'Name'}</strong>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <strong>{'Account Type'}</strong>
+                                    <strong>{'Email'}</strong>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <strong>{'Balance'}</strong>
+                                    <strong>{'Phone'}</strong>
                                 </TableCell>
                                 <TableCell align="center">
-                                    <strong>{'Branch'}</strong>
+                                    <strong>{'Customer Id'}</strong>
                                 </TableCell>
                                 {/*<TableCell align="center" />*/}
                                 <TableCell align="center" />
@@ -142,7 +243,7 @@ const Index = () => {
                         <TableBody>
                             {pageRows.length > 0 ? (
                                 pageRows.map((each, i) => (
-                                    <AccountRow
+                                    <UserRow
                                         key={each._id}
                                         each={each}
                                         i={i}
@@ -151,7 +252,10 @@ const Index = () => {
                                         editCallback={(editedElement, objIndex) => {
                                             let _pageRows = pageRows;
                                             _pageRows[objIndex].name = editedElement.name;
-                                            _pageRows[objIndex].shortName = editedElement.shortName;
+                                            _pageRows[objIndex].avatar = editedElement.avatar;
+                                            _pageRows[objIndex].phone = editedElement.phone;
+                                            _pageRows[objIndex].email = editedElement.email;
+                                            _pageRows[objIndex].address = editedElement.address;
                                             setPageRows(_pageRows);
                                         }}
                                         deleteCallback={(elementToDelete) => {
@@ -162,7 +266,7 @@ const Index = () => {
                             ) : !loading ? (
                                 <TableRow>
                                     <TableCell align="center" colSpan={5}>
-                                        {'No Account Available'}
+                                        {'No Users Available'}
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -186,8 +290,41 @@ const Index = () => {
                     </Box>
                 </TableContainer>
             </Box>
-            <CreateAccountDialog
-
+            <CreateUserDialog
+                show={openCreate}
+                dismiss={handleClose}
+                onCropped={(data) => {
+                    setImage(data);
+                    setImageFile(dataURLtoFile(data, 'imageToUpload.png'));
+                }}
+                onSelected={(s) => {
+                    setSrc(s);
+                }}
+                image={image}
+                src={src}
+                setSrc={setSrc}
+                isSquare={true}
+                aspectRatio={1}
+                creating={creating}
+                setValue={setValue}
+                setShortName={setShortName}
+                saveClick={handleCreate}
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                phone={phone}
+                setPhone={setPhone}
+                address={address}
+                setAddress={setAddress}
+                dob={dob}
+                setDob={setDob}
+                adhaar={aadhar}
+                setAdhaar={setAdhaar}
+                gender={gender}
+                setGender={setGender}
+                password={password}
+                setPassword={setPassword}
             />
         </Box>
     );
@@ -196,4 +333,4 @@ const Index = () => {
 export default Index;
 
 // Index.Layout = null;
-Index.title = 'All Accounts'
+Index.title = 'All Users'

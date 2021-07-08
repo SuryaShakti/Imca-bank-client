@@ -11,6 +11,7 @@ import { SnackbarProvider } from 'notistack';
 import UserStore from '../src/store/userStore';
 import DefaultLayout from '../src/Layout/Layout';
 import SelectedAccountStore from '../src/store/selectedAccountStore';
+import 'cropperjs/dist/cropper.css';
 
 const Noop = ({ children }) => children;
 

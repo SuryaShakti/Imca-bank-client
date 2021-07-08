@@ -23,7 +23,7 @@ import { useState } from "react";
 import {Dialog} from "@material-ui/core";
 import WelcomeImage from '../../public/Group86.svg';
 import SelectedAccountStore from '../store/selectedAccountStore';
-
+import Logo from '../../public/Group 58.svg';
 
 const lightColor = "rgba(255, 255, 255, 0.7)";
 
@@ -92,6 +92,7 @@ function Header(props) {
         setOpenSwitchAccount(false);
     };
 
+
 	return (
 		<React.Fragment>
 			<Head>
@@ -99,9 +100,13 @@ function Header(props) {
 					{title ? title + " | IMCA Bank" : "IMCA Bank"}
 				</title>
 			</Head>
-			<AppBar color="#ffffff" position="sticky" elevation={0}>
+			<AppBar color={'#ffffff'} position="sticky" elevation={0}>
 				<Toolbar>
 					<Grid container spacing={1} alignItems="center">
+						{
+							user.role === 2 ?
+							<img width={'120px'} src={Logo} alt={'IMCA bank'} /> : null
+						}
 						<Hidden smUp>
 							<Grid item>
 								<IconButton
@@ -158,23 +163,26 @@ function Header(props) {
 					</Grid>
 				</Toolbar>
 			</AppBar>
-			<AppBar
-				component="div"
-				className={classes.secondaryBar}
-				color="#ffffff"
-				position="static"
-				elevation={2}
-			>
-				<Toolbar>
-					<Grid container alignItems="center" spacing={1}>
-						<Grid item xs>
-							<Typography color="primary" variant="h3">
-								{title ? title : ""}
-							</Typography>
+			{
+				user.role === 1 ?
+				<AppBar
+					component="div"
+					className={classes.secondaryBar}
+					color="#ffffff"
+					position="static"
+					elevation={2}
+				>
+					<Toolbar>
+						<Grid container alignItems="center" spacing={1}>
+							<Grid item xs>
+								<Typography color="primary" variant="h3">
+									{title ? title : ""}
+								</Typography>
+							</Grid>
 						</Grid>
-					</Grid>
-				</Toolbar>
-			</AppBar>
+					</Toolbar>
+				</AppBar> : null
+			}
 
 			<Dialog fullScreen open={openSwitchAccount}>
 			<Box

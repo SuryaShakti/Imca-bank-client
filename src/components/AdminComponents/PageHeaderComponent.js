@@ -9,7 +9,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 const PageHeaderComponent = ({ title, search, onChange, setOpenCreate, addButtonText, searchPlaceholder }) => {
     return (
-        <Grid container>
+        <Grid container style={{margin: '30px 0'}}>
             <Hidden xsDown>
                 <Grid item xs={12} sm={12} md={12}>
                     <Typography variant={'h3'}>{title}</Typography>
