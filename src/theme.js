@@ -205,6 +205,21 @@ theme = {
           border: `1px solid ${theme.palette.primary.main}`
         }
       }
+    },
+    MuiTableHead: {
+        root:{
+          background: theme.palette.primary.main,
+        }
+    },
+    MuiTableCell:{
+      head:{
+        color: '#ffffff',
+      }
+    },
+    MuiFormLabel:{
+      root:{
+        color: '#000',
+      }
     }
   }
 }

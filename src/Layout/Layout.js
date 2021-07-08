@@ -41,6 +41,14 @@ const useStyle = makeStyles(theme => ({
             padding: theme.spacing(4, 1),
         }
     },
+    adminMain:{
+        flex: 1,
+        background: '#E8E7F1',
+        padding: theme.spacing(1, 4),
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(4, 1),
+        }
+    },
     footer: {
         padding: theme.spacing(2),
         background: '#eaeff1',
@@ -88,12 +96,16 @@ function Layout({ children, title }) {
             }
             <div className={classes.app}>
                 <Header onDrawerToggle={handleDrawerToggle} title={title} />
-                <main className={classes.main}>
-                    {children}
-                </main>
-                {/*<footer className={classes.footer}>*/}
-                {/*    /!*<Copyright />*!/*/}
-                {/*</footer>*/}
+                {
+                    user.role === 1 ?
+                    <main className={classes.main}>
+                        {children}
+                    </main> :
+                        <main className={classes.adminMain}>
+                            {children}
+                        </main>
+
+                }
             </div>
         </div>
     );

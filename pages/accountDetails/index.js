@@ -25,6 +25,9 @@ const Index = () => {
         console.log(user);
         console.log("account 1 ", account1);
         console.log("account 2 ", account2);
+        if (accounts.length === 1){
+            setAccountToDisplay(account1);
+        }
         if (!account) {
             setIsLoading(true);
             if (accounts.length > 1) {

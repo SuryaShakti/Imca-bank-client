@@ -1,29 +1,32 @@
 import app from './index';
 
-export const AcountService = app.service("accounts");
+export const AccountService = app.service("account");
 
-export const getAllAccounts = (skip = 0, limit) => AccountService.find({
+export const getAllAccounts = (skip = 0, limit, search) => AccountService.find({
     query: {
+        accountNumber: {
+            $regex: `.*${search}.*`,
+            $options: 'i',
+        },
+        $populate: 'user',
         $skip: skip,
-        $limit: limit
+        $limit: limit,
+        status: 1,
     }
 });
 
-export const createAccount = (userName, phone, email, dob, address, adhaar, avatar, accountNumber, accounType, ifscCode, branch, customrId, nominee) =>
+export const createAccount = (user, accountType, ifsc, branch,  nomineeName, balance) =>
     AccountService.create({
-        name: userName,
-        phone,
-        email,
-        dob,
-        address,
-        adhaar,
-        avatar,
-        accountNumber,
-        accounType,
-        ifscCode,
+        user,
+        accountType,
+        ifsc,
         branch,
-        customrId,
-        nominee
+        nomineeName,
+        balance
+    },{
+        query:{
+            $populate: 'user'
+        }
     });
 
 export const deleteAccount = (id) => AccountService.remove(id);
