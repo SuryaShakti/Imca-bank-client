@@ -3,13 +3,14 @@ import { useStore } from 'laco-react';
 import React, {useState} from 'react'
 import UserStore from '../../src/store/userStore';
 import SelectedAccountStore from "../../src/store/selectedAccountStore";
+import {useRouter} from "next/router";
 
 const Index = () => {
 
     const { user } = useStore(UserStore);
     const { account } = useStore(SelectedAccountStore);
     const [accountToDisplay, setAccountToDisplay] = useState(account ? user.accounts.filter(item => item.accountNumber == account)[0] : null);
-
+    const Router = useRouter();
 
     return (
         <React.Fragment>
@@ -86,6 +87,7 @@ const Index = () => {
                                     variant={'contained'}
                                     color={'primary'}
                                     fullWidth
+                                    onClick={() => Router.push('/mini-statement')}
                                 >
                                     {'Mini Statements'}
                                 </Button>
@@ -94,6 +96,7 @@ const Index = () => {
                                     variant={'contained'}
                                     color={'secondary'}
                                     fullWidth
+                                    onClick={() => Router.push('/funds-transfer')}
                                 >
                                     {'Funds Transfer'}
                                 </Button>
@@ -132,6 +135,7 @@ const Index = () => {
                         variant={'contained'}
                         color={'secondary'}
                         fullWidth
+                        onClick={() => Router.push('/mini-statement')}
                     >
                         {'Check Mini Statements'}
                     </Button>
@@ -140,6 +144,7 @@ const Index = () => {
                         variant={'contained'}
                         color={'primary'}
                         fullWidth
+                        onClick={() => Router.push('/funds-transfer')}
                     >
                         {'Transfer Funds'}
                     </Button>

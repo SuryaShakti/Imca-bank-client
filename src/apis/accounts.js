@@ -15,6 +15,12 @@ export const getAllAccounts = (skip = 0, limit, search) => AccountService.find({
     }
 });
 
+export const getParticularAccount = (accountNumber) => AccountService.find({
+    query: {
+        accountNumber: accountNumber
+    }
+})
+
 export const createAccount = (user, accountType, ifsc, branch,  nomineeName, balance) =>
     AccountService.create({
         user,

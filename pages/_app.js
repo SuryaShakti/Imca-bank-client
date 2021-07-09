@@ -48,7 +48,11 @@ export default function MyApp(props) {
           console.log('app accesstoken', accessToken, user);
           localStorage.setItem('feathers-jwt', accessToken);
           UserStore.set(() => ({ token: accessToken, user }), 'login');
-          SelectedAccountStore.set(() => ({ account: selecteAccount }), 'account');
+          if(user.accounts.length === 1){
+            SelectedAccountStore.set(() => ({ account: user.accounts[0].accountNumber }), 'account');
+          }else {
+            SelectedAccountStore.set(() => ({ account: selecteAccount }), 'account');
+          }
           if (Router.pathname === '/login') {
             if (user.role === 1) {
               Router.replace('/accountDetails').then(() => {

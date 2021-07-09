@@ -9,6 +9,7 @@ import ClientCaptcha from "react-client-captcha";
 import BackImg from '../../public/Group83.png';
 import Vector from '../../public/Group 84.png';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import SelectedAccountStore from "../../src/store/selectedAccountStore";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -116,6 +117,9 @@ const Index = () => {
                     }
                     else {
                         Router.replace('/accountDetails');
+                        if(user.accounts.length === 1){
+                            SelectedAccountStore.set(() => ({ account: user.accounts[0].accountNumber }), 'account');
+                        }
                     }
                 })
                 .catch(error => {

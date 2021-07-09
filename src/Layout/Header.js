@@ -103,10 +103,6 @@ function Header(props) {
 			<AppBar color={'#ffffff'} position="sticky" elevation={0}>
 				<Toolbar>
 					<Grid container spacing={1} alignItems="center">
-						{
-							user.role === 2 ?
-							<img width={'120px'} src={Logo} alt={'IMCA bank'} /> : null
-						}
 						<Hidden smUp>
 							<Grid item>
 								<IconButton
@@ -120,13 +116,6 @@ function Header(props) {
 							</Grid>
 						</Hidden>
 						<Grid item xs />
-						{/*{*/}
-						{/*	user.role && user.role === 2 ? */}
-						{/*	<Box>*/}
-						{/*		*/}
-						{/*	</Box>*/}
-						{/*	: null	*/}
-						{/*}*/}
 						<Grid item>
 							<Box>
 								<Chip onClick={handleClick} aria-describedby={id} 
@@ -152,48 +141,12 @@ function Header(props) {
 										flexDirection={'column'}
 									>
 										{
-											user.role && user.role === 2 ?
-												<Button
-													onClick={() => Router.push('/admin/dashboard')}
-													color={"primary"}
-												>
-													{"Dashboard"}
-												</Button> : null
-										}
-										{
-											user.role && user.role === 2 ?
-												<Button
-													onClick={() => Router.push('/admin/users')}
-													color={"primary"}
-												>
-													{"All Users"}
-												</Button> : null
-										}
-										{
 											user.role && user.role === 1 ?
 												<Button
 													onClick={() => setOpenSwitchAccount(true)}
 													color={"primary"}
 												>
 													{"Switch Account"}
-												</Button> : null
-										}
-										{
-											user.role && user.role === 2 ?
-												<Button
-													onClick={() => Router.push('/admin/accounts')}
-													color={"primary"}
-												>
-													{"All Accounts"}
-												</Button> : null
-										}
-										{
-											user.role && user.role === 2 ?
-												<Button
-													onClick={() => Router.push('/admin/transactions')}
-													color={"primary"}
-												>
-													{"All Transactions"}
 												</Button> : null
 										}
 										<Button

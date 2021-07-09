@@ -13,6 +13,8 @@ import Link from "../../src/Link";
 import { useRouter } from "next/router";
 import Logo from '../../public/Group 58.svg'
 import { Box } from "@material-ui/core";
+import {useStore} from "laco-react";
+import UserStore from "../store/userStore";
 
 const styles = (theme) => ({
   categoryHeader: {
@@ -56,6 +58,7 @@ const styles = (theme) => ({
 
 function Navigator(props) {
   const { classes, ...other } = props;
+  const { user } = useStore(UserStore);
 
   const Router = useRouter();
 
@@ -79,12 +82,6 @@ function Navigator(props) {
       href: "/funds-transfer",
     },
     {
-      id: "Update Profile",
-      icon: <DnsRoundedIcon />,
-      active: Router.pathname === "/update-profile",
-      href: "/update-profile",
-    },
-    {
       id: "Request Checkbook",
       icon: <DnsRoundedIcon />,
       active: Router.pathname === "/request-checkbook",
@@ -96,6 +93,39 @@ function Navigator(props) {
       active: Router.pathname === "/mini-statement",
       href: "/mini-statement",
     },
+  ]
+
+  const adminNavs = [
+    {
+      id: "Dashboard",
+      icon: <DnsRoundedIcon />,
+      active: Router.pathname === "/admin/dashboard",
+      href: "/admin/dashboard",
+    },
+    {
+      id: "All Users",
+      icon: <DnsRoundedIcon />,
+      active: Router.pathname === "/admin/users",
+      href: "/admin/users",
+    },
+    {
+      id: "All Accounts",
+      icon: <DnsRoundedIcon />,
+      active: Router.pathname === "/admin/accounts",
+      href: "/admin/accounts",
+    },
+    {
+      id: "Chequebook Requests",
+      icon: <DnsRoundedIcon />,
+      active: Router.pathname === "/admin/chequebook-requests",
+      href: "/admin/chequebook-requests",
+    },
+    {
+      id: "All Transactions",
+      icon: <DnsRoundedIcon />,
+      active: Router.pathname === "/admin/transactions",
+      href: "/admin/transactions",
+    }
   ]
 
   return (
@@ -112,34 +142,65 @@ function Navigator(props) {
           <img width={'80%'} src={Logo}
             onClick={() => Router.push("/accountDetails")} />
         </Box>
-        <React.Fragment>
-          {options.map(({ id: childId, icon, active, href }) => (
-            <React.Fragment key={childId}>
-              <ListItem
-                key={childId}
-                button
-                className={clsx(classes.item, active && classes.itemActiveItem)}
-                component={Link}
-                href={href}
-                as={href}
-                style={{
-                  textDecoration: "none",
-                  height: 40,
-                }}
-              >
-                <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
-                <ListItemText
-                  classes={{
-                    primary: classes.itemPrimary,
-                  }}
-                >
-                  {childId}
-                </ListItemText>
-              </ListItem>
-              <Divider className={classes.divider} />
-            </React.Fragment>
-          ))}
-        </React.Fragment>
+        {
+          user.role === 1 ?
+              <React.Fragment>
+                {options.map(({id: childId, icon, active, href}) => (
+                    <React.Fragment key={childId}>
+                      <ListItem
+                          key={childId}
+                          button
+                          className={clsx(classes.item, active && classes.itemActiveItem)}
+                          component={Link}
+                          href={href}
+                          as={href}
+                          style={{
+                            textDecoration: "none",
+                            height: 40,
+                          }}
+                      >
+                        <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
+                        <ListItemText
+                            classes={{
+                              primary: classes.itemPrimary,
+                            }}
+                        >
+                          {childId}
+                        </ListItemText>
+                      </ListItem>
+                      <Divider className={classes.divider}/>
+                    </React.Fragment>
+                ))}
+              </React.Fragment> :
+              <React.Fragment>
+                {adminNavs.map(({id: childId, icon, active, href}) => (
+                    <React.Fragment key={childId}>
+                      <ListItem
+                          key={childId}
+                          button
+                          className={clsx(classes.item, active && classes.itemActiveItem)}
+                          component={Link}
+                          href={href}
+                          as={href}
+                          style={{
+                            textDecoration: "none",
+                            height: 40,
+                          }}
+                      >
+                        <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
+                        <ListItemText
+                            classes={{
+                              primary: classes.itemPrimary,
+                            }}
+                        >
+                          {childId}
+                        </ListItemText>
+                      </ListItem>
+                      <Divider className={classes.divider}/>
+                    </React.Fragment>
+                ))}
+              </React.Fragment>
+        }
       </List>
     </Drawer>
   );

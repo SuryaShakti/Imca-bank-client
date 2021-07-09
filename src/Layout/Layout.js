@@ -78,8 +78,8 @@ function Layout({ children, title }) {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            {
-                user.role === 1 ?
+            {/*{*/}
+            {/*    user.role === 1 ?*/}
                 <nav className={classes.drawer}>
                     <Hidden smUp implementation="js">
                         <Navigator
@@ -92,8 +92,8 @@ function Layout({ children, title }) {
                     <Hidden xsDown implementation="css">
                         <Navigator PaperProps={{ style: { width: drawerWidth } }} />
                     </Hidden>
-                </nav> : null
-            }
+                </nav>
+            {/*}*/}
             <div className={classes.app}>
                 <Header onDrawerToggle={handleDrawerToggle} title={title} />
                 {

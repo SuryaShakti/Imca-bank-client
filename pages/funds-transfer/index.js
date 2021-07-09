@@ -1,19 +1,72 @@
-import { Box, Button, TextField, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import {Box, Button, CircularProgress, TextField, Typography} from '@material-ui/core'
+import React, {useEffect, useState} from 'react'
+import {useStore} from "laco-react";
+import UserStore from "../../src/store/userStore";
+import SelectedAccountStore from "../../src/store/selectedAccountStore";
+import {useSnackbar} from "notistack";
+import {createFundsTransfer} from "../../src/apis/fundsTranfer";
+import {getParticularAccount} from "../../src/apis/accounts";
 
 const Index = () => {
 
+    const [myAccount, setMyAccount] = useState({});
+    const [name, setName] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
     const [ifsc, setIfsc] = useState('');
     const [amount, setAmount] = useState('');
+    const { enqueueSnackbar } = useSnackbar();
+    const { user } = useStore(UserStore);
+    const [loading, setLoading] = useState(false);
+    const { account } = useStore(SelectedAccountStore);
 
+    useEffect(() => {
+        console.log(account);
+        getParticularAccount(account).then((res) => {
+            setMyAccount(res);
+        }).catch((e) =>  enqueueSnackbar(e.message ? e.message : "Something Went Wrong", { variant: 'error' }))
+    },[])
+
+    const validate = () => {
+        if(name.trim() === ''){
+            enqueueSnackbar("Please Enter user's name.", { variant: 'warning' });
+            return false;
+        } else if(accountNumber.trim() === ''){
+            enqueueSnackbar("Please Enter user's Account Number.", { variant: 'warning' });
+            return false;
+        } else if(ifsc.trim() === ''){
+            enqueueSnackbar("Please Enter IFSC code.", { variant: 'warning' });
+            return false;
+        } else if(amount.trim() === ''){
+            enqueueSnackbar("Please Enter amount", { variant: 'warning' });
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    const sendHandler = () => {
+        console.log(myAccount);
+        console.log(myAccount._id);
+        if(validate()){
+            setLoading(true);
+            createFundsTransfer(myAccount.data[0]._id, name, accountNumber, ifsc, amount)
+                .then((res) => {
+                    console.log(res);
+                    enqueueSnackbar("Amount Sent Successfully", { variant: 'success' });
+                    setName('');
+                    setAccountNumber('');
+                    setIfsc('');
+                    setAmount('');
+                }).catch((e) => enqueueSnackbar(e.message ? e.message : "Something Went Wrong", { variant: 'error' }))
+                .finally(() => setLoading(false));
+        }
+    }
 
     return (
         <Box
             display={'flex'}
             justifyContent={'center'}
             alignItems={'center'}
-            // height={'100vh'}
             width={'100%'}
             p={{ xs: 1, md: 3 }}
         >
@@ -43,7 +96,7 @@ const Index = () => {
                         {'Account'}
                     </Typography>
                     <Typography variant={'subtitle1'}>
-                        {'200295188881'}
+                        {account}
                     </Typography>
                 </Box>
                 <Box width={'100%'} mb={'5px'}>
@@ -54,11 +107,23 @@ const Index = () => {
                 <Box my={1} />
                 <Box width={'100%'} mb={'5px'}>
                     <Typography variant={'caption'}>
+                        {'Account Holder'}
+                    </Typography>
+                </Box>
+                <TextField
+                    value={name}
+                    onChange={event => setName(event.target.value)}
+                    variant="outlined"
+                    fullWidth
+                    style={{ backgroundColor: '#ffffff' }}
+                />
+                <Box my={1} />
+                <Box width={'100%'} mb={'5px'}>
+                    <Typography variant={'caption'}>
                         {'Account Number'}
                     </Typography>
                 </Box>
                 <TextField
-                    // label={'Email'}
                     value={accountNumber}
                     onChange={event => setAccountNumber(event.target.value)}
                     variant="outlined"
@@ -73,7 +138,6 @@ const Index = () => {
                     </Typography>
                 </Box>
                 <TextField
-                    // label={'Email'}
                     value={ifsc}
                     onChange={event => setIfsc(event.target.value)}
                     variant="outlined"
@@ -88,7 +152,6 @@ const Index = () => {
                     </Typography>
                 </Box>
                 <TextField
-                    // label={'Email'}
                     value={amount}
                     onChange={event => setAmount(event.target.value)}
                     variant="outlined"
@@ -102,8 +165,15 @@ const Index = () => {
                     variant={'contained'}
                     color={'primary'}
                     fullWidth
+                    onClick={() => sendHandler()}
                 >
-                    {'Send'}
+                    {loading ? (
+                        <CircularProgress size={15} />
+                    ) : (
+                        <Typography variant={'button'}>
+                            {'Send'}
+                        </Typography>
+                    )}
                 </Button>
             </Box>
         </Box>
