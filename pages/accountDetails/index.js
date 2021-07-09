@@ -7,7 +7,7 @@ import SelectedAccountStore from '../../src/store/selectedAccountStore';
 
 const Index = () => {
 
-    const { user, accessToken } = useStore(UserStore);
+    const { user } = useStore(UserStore);
     const { account } = useStore(SelectedAccountStore);
 
     const [accounts, setAccounts] = useState(user.accounts ? user.accounts : '');

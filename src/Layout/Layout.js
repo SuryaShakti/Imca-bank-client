@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React  from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Navigator from './Navigator';
 import Header from './Header';
 import { useStore } from 'laco-react';
-import Loader from '../components/Loader';
 import { useRouter } from 'next/router';
-import BackImg from '../../public/Vector 44.svg'
-import BackImgMob from '../../public/Group80.svg'
 import UserStore from "../store/userStore";
 
 const drawerWidth = 256;
@@ -78,8 +74,8 @@ function Layout({ children, title }) {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            {
-                user.role === 1 ?
+            {/*{*/}
+            {/*    user.role === 1 ?*/}
                 <nav className={classes.drawer}>
                     <Hidden smUp implementation="js">
                         <Navigator
@@ -92,8 +88,8 @@ function Layout({ children, title }) {
                     <Hidden xsDown implementation="css">
                         <Navigator PaperProps={{ style: { width: drawerWidth } }} />
                     </Hidden>
-                </nav> : null
-            }
+                </nav>
+            {/*}*/}
             <div className={classes.app}>
                 <Header onDrawerToggle={handleDrawerToggle} title={title} />
                 {

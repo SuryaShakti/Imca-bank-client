@@ -1,22 +1,48 @@
-import { Box, Button, Checkbox, FormControlLabel, makeStyles, Typography } from '@material-ui/core'
-import { mergeClasses } from '@material-ui/styles';
-import React, { useState } from 'react'
+import {Box, Button, Checkbox, CircularProgress, FormControlLabel, makeStyles, Typography} from '@material-ui/core'
+import React, {useEffect, useState} from 'react'
+import {requestChequebook} from "../../src/apis/requestChequebook";
+import {useStore} from "laco-react";
+import SelectedAccountStore from "../../src/store/selectedAccountStore";
+import {getParticularAccount} from "../../src/apis/accounts";
+import {useSnackbar} from "notistack";
 
 
 const Index = () => {
 
     const [checkedB, setCheckedDB] = useState(false);
 
+    const [myAccount, setMyAccount] = useState({});
+    const [loading, setLoading] = useState(false);
+    const { account } = useStore(SelectedAccountStore);
+    const { enqueueSnackbar } = useSnackbar();
+
+    useEffect(() => {
+        getParticularAccount(account).then((res) => {
+            setMyAccount(res);
+        }).catch((e) =>  enqueueSnackbar(e.message ? e.message : "Something Went Wrong", { variant: 'error' }))
+    },[])
+
+
     const handleChange = () => {
         setCheckedDB(!checkedB);
     }
+
+    const requestHandler = () => {
+        if(checkedB){
+            setLoading(true);
+            requestChequebook(myAccount.data[0]._id).then((res) => {
+                enqueueSnackbar("Request Sent Successfully", { variant: 'success' });
+            }).catch((e) =>  enqueueSnackbar(e.message ? e.message : "Something Went Wrong", { variant: 'error' }))
+                .finally(() => setLoading(false));
+        }
+    }
+
 
     return (
         <Box
             display={'flex'}
             justifyContent={'center'}
             alignItems={'center'}
-            // height={'100vh'}
             width={'100%'}
             p={{ xs: 1, md: 3 }}
         >
@@ -56,8 +82,14 @@ const Index = () => {
                     />
                 </Box>
                 <Box my={1} />
-                <Button disabled={!checkedB} variant={'contained'} color={'primary'} fullWidth>
-                    {'Request'}
+                <Button disabled={!checkedB} variant={'contained'} color={'primary'} fullWidth onClick={() => requestHandler()}>
+                    {loading ? (
+                        <CircularProgress size={15} />
+                    ) : (
+                        <Typography variant={'button'}>
+                            {'Request'}
+                        </Typography>
+                    )}
                 </Button>
             </Box>
         </Box>
