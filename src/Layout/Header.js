@@ -141,7 +141,7 @@ function Header(props) {
 										flexDirection={'column'}
 									>
 										{
-											user.role && user.role === 1 ?
+											user.role && user.role === 1 && user.accounts.length > 1 ?
 												<Button
 													onClick={() => setOpenSwitchAccount(true)}
 													color={"primary"}

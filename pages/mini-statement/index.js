@@ -13,8 +13,6 @@ const Index = () => {
     const [loading, setLoading] = useState(false);
     const { account } = useStore(SelectedAccountStore);
     const { enqueueSnackbar } = useSnackbar();
-    const [date,setDate] = useState('');
-    const [time,setTime] = useState('');
 
     useEffect(() => {
         getParticularAccount(account).then((res) => {

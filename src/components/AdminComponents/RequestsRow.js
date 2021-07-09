@@ -4,7 +4,6 @@ import {Box, IconButton, TableCell, TableRow, Typography} from "@material-ui/cor
 import {Check, Clear, Delete} from "@material-ui/icons";
 import {withStyles} from "@material-ui/styles";
 import ConfirmDialog from "../confirm/ConfirmDialog";
-import {deleteAccount} from "../../apis/accounts";
 import {deleteRequest} from "../../apis/requestChequebook";
 
 const StyledTableRow = withStyles((theme) => ({

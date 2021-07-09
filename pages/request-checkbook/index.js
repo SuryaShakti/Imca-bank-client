@@ -1,5 +1,4 @@
 import {Box, Button, Checkbox, CircularProgress, FormControlLabel, makeStyles, Typography} from '@material-ui/core'
-import { mergeClasses } from '@material-ui/styles';
 import React, {useEffect, useState} from 'react'
 import {requestChequebook} from "../../src/apis/requestChequebook";
 import {useStore} from "laco-react";

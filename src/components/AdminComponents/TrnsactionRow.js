@@ -1,10 +1,6 @@
-import React, {useState} from 'react';
-import {useSnackbar} from "notistack";
-import { IconButton, TableCell, TableRow} from "@material-ui/core";
-import {Delete} from "@material-ui/icons";
+import React from 'react';
+import { TableCell, TableRow} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
-import ConfirmDialog from "../confirm/ConfirmDialog";
-import {deleteAccount} from "../../apis/accounts";
 
 const StyledTableRow = withStyles((theme) => ({
     root: {

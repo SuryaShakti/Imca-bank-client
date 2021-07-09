@@ -10,9 +10,7 @@ import {
     TableHead,
     TableRow
 } from "@material-ui/core";
-import AccountRow from "../../../src/components/AdminComponents/AccountRow";
 import {Pagination} from "@material-ui/lab";
-import {getAllAccounts} from "../../../src/apis/accounts";
 import {getAllRequests} from "../../../src/apis/requestChequebook";
 import {useSnackbar} from "notistack";
 import {makeStyles} from "@material-ui/styles";
