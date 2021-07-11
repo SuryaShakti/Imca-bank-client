@@ -24,6 +24,7 @@ const Branches = () => {
                                     my={2}
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
+                                    width={'155px'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Shaheed Nagar'}
@@ -33,37 +34,10 @@ const Branches = () => {
                                     p={2}
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
+                                    width={'155px'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
-                                        {'Shaheed Nagar'}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box
-                                display={'flex'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                            >
-                                <Box
-                                    p={2}
-                                    mx={{xs:2, sm:5, md: 9, lg: 12}}
-                                    my={2}
-                                    bgcolor={'#e1e0e0'}
-                                    borderRadius={'borderRadius'}
-                                >
-                                    <Typography color={'primary'} variant={'body2'} align={'center'} >
-                                        {'Shaheed Nagar'}
-                                    </Typography>
-                                </Box>
-                                <Box
-                                    p={2}
-                                    bgcolor={'#e1e0e0'}
-                                    borderRadius={'borderRadius'}
-                                >
-                                    <Typography color={'primary'} variant={'body2'} align={'center'} >
-                                        {'Shaheed Nagar'}
+                                        {'Utkal University'}
                                     </Typography>
                                 </Box>
                             </Box>
@@ -80,18 +54,50 @@ const Branches = () => {
                                     my={2}
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
+                                    width={'155px'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
-                                        {'Shaheed Nagar'}
+                                        {'Khandagiri'}
                                     </Typography>
                                 </Box>
                                 <Box
                                     p={2}
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
+                                    width={'160px'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
-                                        {'Shaheed Nagar'}
+                                        {'Master Canteen'}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Box
+                                display={'flex'}
+                                justifyContent={'center'}
+                                alignItems={'center'}
+                            >
+                                <Box
+                                    p={2}
+                                    mx={{xs:2, sm:5, md: 9, lg: 12}}
+                                    my={2}
+                                    bgcolor={'#e1e0e0'}
+                                    borderRadius={'borderRadius'}
+                                    width={'155px'}
+                                >
+                                    <Typography color={'primary'} variant={'body2'} align={'center'} >
+                                        {'Old Town'}
+                                    </Typography>
+                                </Box>
+                                <Box
+                                    p={2}
+                                    bgcolor={'#e1e0e0'}
+                                    borderRadius={'borderRadius'}
+                                    width={'155px'}
+                                >
+                                    <Typography color={'primary'} variant={'body2'} align={'center'} >
+                                        {'Ashok Nagar'}
                                     </Typography>
                                 </Box>
                             </Box>

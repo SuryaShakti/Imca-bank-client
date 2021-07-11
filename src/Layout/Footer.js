@@ -264,59 +264,28 @@ const Footer = () => {
                         </Grid>
                         <Grid item xs={12} md={3} className={classes.gridItem}>
                             <div style={{height:'46px'}}>
-                                <Typography className={classes.heading}>{'Subscribe to our newsletter'}</Typography>
+                                <Typography className={classes.heading}>{'Others'}</Typography>
                             </div>
                             <Hidden smDown>
                                 <Divider className={classes.divider} light />
                             </Hidden>
-                            <Hidden smDown>
-                                <div className={classes.inputDiv} >
-                                    <TextField className={classes.inputField}
-                                        placeholder={'example@gmail.com'}
-                                        size={'small'}
-                                        fullWidth
-                                        InputProps={{
-                                            disableUnderline: true,
-                                            className: classes.fieldText
-                                        }}
-                                    />
-                                </div>
-                            </Hidden>
-                            <Hidden mdUp>
-                                <div className={classes.inputDiv} >
-                                    <TextField className={classes.inputField}
-                                        placeholder={'example@gmail.com'}
-                                        size={'small'}
-                                        fullWidth
-                                        InputProps={{
-                                            disableUnderline: true,
-                                            className: classes.fieldText
-                                        }}
-                                    />
-                                </div>
-                            </Hidden>
-                            <div className={classes.btnDiv}>
-                                <Button className={classes.button} variant={'contained'} color={'primary'} >
-                                    {'Submit'}
-                                </Button>
-                            </div>
+                            <List>
+                                <ListItem className={classes.listItem}>
+                                    <Button style={{color: '#fff'}} component={Link} href={'/about'}>
+                                        <Typography className={classes.captionText} variant={'caption'}>
+                                            {'Terms and Conditions'}
+                                        </Typography>
+                                    </Button>
+                                </ListItem>
+                                <ListItem className={classes.listItem}>
+                                    <Button style={{color: '#fff'}} component={Link} href={'/team'}>
+                                        <Typography className={classes.captionText} variant={'caption'}>
+                                            {'Privacy Policy'}
+                                        </Typography>
+                                    </Button>
+                                </ListItem>
+                            </List>
                         </Grid>
-                    </Grid>
-                </Grid>
-                <Grid container xs={12} sm={10} className={classes.terms}>
-                    <Grid item xs={12} sm={3} md={3} className={classes.gridItem} style={{marginTop: '10px'}}>
-                        <Button style={{color: '#fff'}}>
-                            <Typography style={{fontWeight: '400'}} className={classes.captionText} variant={'caption'}>
-                                {'Terms & conditions'}
-                            </Typography>
-                        </Button>
-                    </Grid>
-                    <Grid item xs={12} sm={3} md={3} className={classes.gridItem} style={{marginTop: '10px'}}>
-                        <Button style={{color: '#fff'}}>
-                            <Typography style={{fontWeight: '400'}} className={classes.captionText} variant={'caption'}>
-                                {'Privacy Policy'}
-                            </Typography>
-                        </Button>
                     </Grid>
                 </Grid>
             </Grid>

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Image2 from '../../../../public/g10 (1).svg'
 import FirstImage from '../../../../public/Group 75.svg'
+import Link from "../../../Link";
 
 const FirstSection = () => {
 
@@ -49,9 +50,10 @@ const FirstSection = () => {
                             <Button
                                 variant={'contained'}
                                 color={'secondary'}
-                                component={Box}
-                                width={'200px'}
-                                style={{ color: '#ffffff' }}
+                                component={Link}
+                                // width={'200px'}
+                                style={{ color: '#ffffff', width: '200px' }}
+                                href={'#ContactUs'}
                             >
                                 {'Conatct Us'}
                             </Button>
