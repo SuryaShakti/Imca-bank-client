@@ -35,7 +35,7 @@ const RequestsRow = ({ each, i, pageLimit, page, editCallback }) => {
     const AprroveHandler = () => {
         deleteRequest(each._id, 2)
             .then((res) => {
-                editCallback(res);
+                editCallback(res, i);
                 enqueueSnackbar('Request Approved successfully.', { variant: 'success' });
             }).catch((e) => {
             enqueueSnackbar(e.message ? e.message : "Can't Approve", { variant: 'error' });

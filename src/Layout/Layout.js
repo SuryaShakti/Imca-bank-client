@@ -107,9 +107,4 @@ function Layout({ children, title }) {
     );
 }
 
-Layout.propTypes = {
-    children: PropTypes.any.isRequired,
-    title: PropTypes.string,
-};
-
 export default Layout;

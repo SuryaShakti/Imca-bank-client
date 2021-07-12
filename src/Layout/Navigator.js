@@ -205,8 +205,4 @@ function Navigator(props) {
   );
 }
 
-Navigator.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
 export default withStyles(styles)(Navigator);
