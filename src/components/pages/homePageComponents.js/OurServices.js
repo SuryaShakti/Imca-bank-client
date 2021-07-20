@@ -8,7 +8,7 @@ import Image3 from '../../../../public/Group 74.svg';
 
 const OurServices = () => {
     return (
-        <Container maxWidth={'xl'}>
+        <Container maxWidth={'xl'} style={{overflowX: 'hidden'}}>
                 <Grid container component={Box} p={{ xs: '5px', md: '20px' }}>
                     <Grid xs={12} item conatiner justify={'center'} alignItems={'center'}>
                         <Typography align={'center'} variant={'h2'} color={'primary'}>
@@ -23,6 +23,7 @@ const OurServices = () => {
                     />
                     <AuroWhyUsSignleItem
                         image={Image2}
+                        isRight={true}
                         title={'Funds Transfer'}
                         description={'You can transfer money from your account to another account of our bank.'}
                     />
@@ -33,6 +34,7 @@ const OurServices = () => {
                     />
                     <AuroWhyUsSignleItem
                         image={Image4}
+                        isRight={true}
                         title={'Account Details'}
                         description={'You Can check your account details such as account type, account number, branch, ifsc code etc'}
                     />

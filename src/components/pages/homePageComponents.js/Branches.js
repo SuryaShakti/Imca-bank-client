@@ -25,6 +25,8 @@ const Branches = () => {
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
                                     width={'155px'}
+                                    data-aos={'fade-up'}
+                                    data-aos-delay={'300'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Shaheed Nagar'}
@@ -35,6 +37,8 @@ const Branches = () => {
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
                                     width={'155px'}
+                                    data-aos={'fade-up'}
+                                    data-aos-delay={'350'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Utkal University'}
@@ -47,6 +51,8 @@ const Branches = () => {
                                 display={'flex'}
                                 justifyContent={'center'}
                                 alignItems={'center'}
+                                data-aos={'fade-up'}
+                                data-aos-delay={'400'}
                             >
                                 <Box
                                     p={2}
@@ -55,6 +61,8 @@ const Branches = () => {
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
                                     width={'155px'}
+                                    data-aos={'fade-up'}
+                                    data-aos-delay={'450'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Khandagiri'}
@@ -65,6 +73,8 @@ const Branches = () => {
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
                                     width={'160px'}
+                                    data-aos={'fade-up'}
+                                    data-aos-delay={'500'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Master Canteen'}
@@ -85,6 +95,8 @@ const Branches = () => {
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
                                     width={'155px'}
+                                    data-aos={'fade-up'}
+                                    data-aos-delay={'550'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Old Town'}
@@ -95,6 +107,8 @@ const Branches = () => {
                                     bgcolor={'#e1e0e0'}
                                     borderRadius={'borderRadius'}
                                     width={'155px'}
+                                    data-aos={'fade-up'}
+                                    data-aos-delay={'600'}
                                 >
                                     <Typography color={'primary'} variant={'body2'} align={'center'} >
                                         {'Ashok Nagar'}
@@ -103,7 +117,7 @@ const Branches = () => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid container item xs={12} sm={6} justify={'center'} alignItems={'center'}>
+                    <Grid data-aos={'zoom-in'} data-aos-delay={'300'} container item xs={12} sm={6} justify={'center'} alignItems={'center'}>
                         <img src={Image1} width={'80%'} />
                     </Grid>
                 </Grid>
