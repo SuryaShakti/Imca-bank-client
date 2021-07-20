@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import { useRouter } from 'next/router';
 import Loader from '../src/components/Loader';
-import app, { cookieStorage } from '../src/apis/index';
+import app  from '../src/apis/index';
 import { SnackbarProvider } from 'notistack';
 import UserStore from '../src/store/userStore';
 import DefaultLayout from '../src/Layout/Layout';
 import SelectedAccountStore from '../src/store/selectedAccountStore';
 import 'cropperjs/dist/cropper.css';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Noop = ({ children }) => children;
 
@@ -28,7 +30,9 @@ export default function MyApp(props) {
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
-    console.log('app useEffect caleled');
+
+    AOS.init();
+
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -36,7 +40,6 @@ export default function MyApp(props) {
 
     const token = localStorage.getItem('feathers-jwt');
     const selecteAccount = localStorage.getItem('selectedAccount');
-    console.log("selected account", selecteAccount);
     if (token) {
       app
         .authenticate({
@@ -45,7 +48,6 @@ export default function MyApp(props) {
         })
         .then(response => {
           const { accessToken, user } = response;
-          console.log('app accesstoken', accessToken, user);
           localStorage.setItem('feathers-jwt', accessToken);
           UserStore.set(() => ({ token: accessToken, user }), 'login');
           if(user.accounts.length === 1){
@@ -68,12 +70,7 @@ export default function MyApp(props) {
           }
         })
         .catch(() => {
-          console.log('catch method called');
-          // app.logout();
-          // localStorage.removeItem('feathers-jwt');
-          // Router.replace('/').then(() => {
           setLoading(false);
-          // });
         });
     } else {
       if (Router.pathname === '/' || Router.pathname === '/login') {
@@ -83,7 +80,6 @@ export default function MyApp(props) {
           setLoading(false);
         });
       }
-      // setLoading(false);
     }
   }, []);
 
@@ -109,8 +105,3 @@ export default function MyApp(props) {
     </React.Fragment>
   );
 }
-
-MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
-};

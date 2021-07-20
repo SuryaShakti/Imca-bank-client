@@ -14,13 +14,13 @@ const ContctUs = () => {
             </Typography>
             <Grid container justify={'center'} alignItems={'center'}>
                 <Grid item xs={12} md={7}>
-                    <Box display={'flex'} justifyContent={'center'}>
+                    <Box data-aos={'zoom-in'} display={'flex'} justifyContent={'center'}>
                         <img src={ContactImage} alt={'ContactImage'} width={'90%'} />
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={5}>
                     <Box display={'flex'} height={'100%'} justifyContent={'center'} alignItems={'center'}>
-                          <List>
+                          <List data-aos={'fade-left'}>
                               <ListItem>
                                   <ListItemIcon>
                                       <img src={LocationLogo} alt={'Location'} />

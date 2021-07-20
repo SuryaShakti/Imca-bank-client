@@ -1,30 +1,50 @@
 import { Box, Button, Hidden, Typography } from '@material-ui/core'
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, {useState} from 'react';
 import Image2 from '../../../../public/g10 (1).svg'
 import FirstImage from '../../../../public/Group 75.svg'
 import Link from "../../../Link";
+import Particles from "react-particles-js";
+import ParticleJSON from '../../../particlesjs-config.json';
+import {makeStyles} from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => ({
+    canvas:{
+        height: '100%',
+        width: '100%',
+    }
+}))
 
 const FirstSection = () => {
 
+    const classes = useStyles();
     const Router = useRouter();
 
     return (
         <Box display={'flex'} justifyContent={'center'} alignItems={'center'} p={{ xs: 1, md: 0 }}>
             <Hidden smDown>
-                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} width={'50%'} height={'100vh'} bgcolor={'primary.main'}>
-                    <img width={'80%'} src={FirstImage}></img>
+                <Box style={{position: 'relative'}} width={'50%'} height={'100vh'} bgcolor={'primary.main'}>
+                    <div style={{height: '100%'}}>
+                        <Particles
+                            width='100%'
+                            height='100%'
+                            params={ParticleJSON}
+                            style={{width: '100%', height: '100%'}}
+                            canvasClassName={classes.canvas}
+                        />
+                    </div>
+                    <img style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}} width={'80%'} src={FirstImage}></img>
                 </Box>
             </Hidden>
             <Box width={{ xs: '100%', md: '50%' }} display={'flex'} justifyContent={'center'} alignItems={'center'}>
                 <Box width={{ xs: '100%', md: '45vw' }}>
-                    <Box px={{ xs: 1, md: 0 }}>
+                    <Box data-aos={'fade-left'} px={{ xs: 1, md: 0 }}>
                         <Typography variant={'h1'}>
                             {'Welcome to the'}
                             <span style={{ color: '#6C63FF' }}>{' IMCA Bank'}</span>
                         </Typography>
                     </Box>
-                    <Box p={{ xs: 1, md: 0 }}>
+                    <Box data-aos={'fade-left'} data-aos-delay={'700'} p={{ xs: 1, md: 0 }}>
                         <Typography variant={'body2'} >
                             {'Here our priority is your covinience so that you can do multiple tasks from your own home without physically coming to the bank. Here our priority is your covinience so that you can do multiple tasks from your own home without physically coming to the bank.'}
                         </Typography>
@@ -35,7 +55,7 @@ const FirstSection = () => {
                         </Box>
                     </Hidden>
                     <Hidden smDown>
-                        <Box my={2} display={{ xs: 'block', md: 'flex' }} >
+                        <Box data-aos={'fade-left'} data-aos-delay={'900'} my={2} display={{ xs: 'block', md: 'flex' }} >
                             <Box mr={2}>
                                 <Button
                                     variant={'contained'}
