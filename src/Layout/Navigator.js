@@ -81,7 +81,7 @@ function Navigator(props) {
       href: "/funds-transfer",
     },
     {
-      id: "Request Checkbook",
+      id: "Request Chequebook",
       icon: <DnsRoundedIcon />,
       active: Router.pathname === "/request-checkbook",
       href: "/request-checkbook",

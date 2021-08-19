@@ -1,11 +1,11 @@
-import {Box, Button, CircularProgress, TextField, Typography} from '@material-ui/core'
-import React, {useEffect, useState} from 'react'
-import {useStore} from "laco-react";
+import { Box, Button, CircularProgress, TextField, Typography } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
+import { useStore } from "laco-react";
 import UserStore from "../../src/store/userStore";
 import SelectedAccountStore from "../../src/store/selectedAccountStore";
-import {useSnackbar} from "notistack";
-import {createFundsTransfer} from "../../src/apis/fundsTranfer";
-import {getParticularAccount} from "../../src/apis/accounts";
+import { useSnackbar } from "notistack";
+import { createFundsTransfer } from "../../src/apis/fundsTranfer";
+import { getParticularAccount } from "../../src/apis/accounts";
 
 const Index = () => {
 
@@ -20,23 +20,24 @@ const Index = () => {
     const { account } = useStore(SelectedAccountStore);
 
     useEffect(() => {
-        console.log(account);
         getParticularAccount(account).then((res) => {
             setMyAccount(res);
-        }).catch((e) =>  enqueueSnackbar(e.message ? e.message : "Something Went Wrong", { variant: 'error' }))
-    },[])
+        }).catch((e) => enqueueSnackbar(e.message ? e.message : "Something Went Wrong", { variant: 'error' }));
+    }, [])
 
     const validate = () => {
-        if(name.trim() === ''){
+        if (name.trim() === '') {
             enqueueSnackbar("Please Enter user's name.", { variant: 'warning' });
             return false;
-        } else if(accountNumber.trim() === ''){
+        }
+        else if (accountNumber.trim() === '') {
             enqueueSnackbar("Please Enter user's Account Number.", { variant: 'warning' });
             return false;
-        } else if(ifsc.trim() === ''){
+        }
+        else if (ifsc.trim() === '') {
             enqueueSnackbar("Please Enter IFSC code.", { variant: 'warning' });
             return false;
-        } else if(amount.trim() === ''){
+        } else if (amount.trim() === '') {
             enqueueSnackbar("Please Enter amount", { variant: 'warning' });
             return false;
         } else {
@@ -45,9 +46,7 @@ const Index = () => {
     }
 
     const sendHandler = () => {
-        console.log(myAccount);
-        console.log(myAccount._id);
-        if(validate()){
+        if (validate()) {
             setLoading(true);
             createFundsTransfer(myAccount.data[0]._id, name, accountNumber, ifsc, amount)
                 .then((res) => {
@@ -129,7 +128,7 @@ const Index = () => {
                     variant="outlined"
                     fullWidth
                     style={{ backgroundColor: '#ffffff' }}
-
+                    inputProps={{ maxLength: 15 }}
                 />
                 <Box my={1} />
                 <Box width={'100%'} mb={'5px'}>

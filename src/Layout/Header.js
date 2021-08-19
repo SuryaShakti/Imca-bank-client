@@ -57,8 +57,6 @@ function Header(props) {
 
 	const [openSwitchAccount,setOpenSwitchAccount] = useState(false);
 
-	console.log(user);
-
 	const handleLogout = () => {
 		localStorage.removeItem('feathers-jwt');
 		localStorage.removeItem('selectedAccount');
@@ -85,7 +83,6 @@ function Header(props) {
     };
 
     const saveHandler = () => {
-        console.log(typeof selectedChip);
         localStorage.setItem('selectedAccount', selectedChip);
         SelectedAccountStore.set(() => ({ account: selectedChip }), 'account');
 		window.location.reload();

@@ -11,10 +11,29 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import CropperDialog from '../../../components/cropper/CropperDialog';
-import {FormControl, MenuItem, Select} from "@material-ui/core";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
+import { makeStyles } from '@material-ui/styles';
 
-const CreateUser = ({show, dismiss, onCropped, onSelected, src, creating, saveClick, name, setName, email, setEmail, phone, setPhone, setAddress, address, dob, setDob, aadhar, setAdhaar, gender, setGender, password, setPassword, image, setSrc }) => {
+const useStyles = makeStyles((theme) => ({
+    input: {
+        '& input[type=number]': {
+            '-moz-appearance': 'textfield'
+        },
+        '& input[type=number]::-webkit-outer-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0
+        },
+        '& input[type=number]::-webkit-inner-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0
+        }
+    },
+}))
+
+const CreateUser = ({ show, dismiss, onCropped, onSelected, src, creating, saveClick, name, setName, email, setEmail, phone, setPhone, setAddress, address, dob, setDob, aadhar, setAdhaar, gender, setGender, password, setPassword, image, setSrc }) => {
+
     const [openCropDialog, setOpenCropDialog] = useState(false);
+    const classes = useStyles();
 
     return (
         <React.Fragment>
@@ -49,7 +68,7 @@ const CreateUser = ({show, dismiss, onCropped, onSelected, src, creating, saveCl
                             border={1}
                             borderColor={'primary.main'}
                             onClick={() => setOpenCropDialog(true)}
-                            style={{cursor: 'pointer'}}
+                            style={{ cursor: 'pointer' }}
                         >
                             <Typography>
                                 {'Upload'}
@@ -87,8 +106,11 @@ const CreateUser = ({show, dismiss, onCropped, onSelected, src, creating, saveCl
                         </Box>
                         <TextField
                             value={phone}
+                            // type={'number'}
                             onChange={(e) => setPhone(e.target.value)}
                             variant={'outlined'}
+                            inputProps={{ maxLength: 10}}
+                            className={classes.input}
                         />
                         <Box mb={2} />
                         <Box width={'100%'} mb={'5px'}>
@@ -123,6 +145,7 @@ const CreateUser = ({show, dismiss, onCropped, onSelected, src, creating, saveCl
                             value={aadhar}
                             onChange={(e) => setAdhaar(e.target.value)}
                             variant={'outlined'}
+                            inputProps={{ maxLength: 12}}
                         />
                         <Box mb={2} />
                         <Box width={'100%'} mb={'5px'}>
@@ -137,7 +160,7 @@ const CreateUser = ({show, dismiss, onCropped, onSelected, src, creating, saveCl
                                 value={gender}
                                 // defaultValue={1}
                                 // displayEmpty
-                                onChange={(e) => setGender(e.target.value) }
+                                onChange={(e) => setGender(e.target.value)}
                             >
                                 <MenuItem value={1}>{'Male'}</MenuItem>
                                 <MenuItem value={2}>{'Female'}</MenuItem>
