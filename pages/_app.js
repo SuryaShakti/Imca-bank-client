@@ -30,9 +30,7 @@ export default function MyApp(props) {
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
-
     AOS.init();
-
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);

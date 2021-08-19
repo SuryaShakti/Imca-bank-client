@@ -138,7 +138,7 @@ const UserRow = ({ each, i, pageLimit, page, deleteCallback, editCallback }) => 
                 <TableCell align="center">{pageLimit * (page - 1) + (i + 1)}</TableCell>
                 <TableCell align={'center'}>
                     {each && each.avatar ? (
-                        <Avatar src={each && each.avatar} alt={each.name && each.name.charAt(0)} />
+                        <Avatar src={each.avatar} alt={each.name && each.name.charAt(0)} />
                     ) : (
                         <Avatar component={Box} display={'flex'} alignItems={'center'}>
                             {each.name && each.name.charAt(0).toUpperCase()}
@@ -174,7 +174,7 @@ const UserRow = ({ each, i, pageLimit, page, deleteCallback, editCallback }) => 
                         }}
                     >
                         <Typography align={'center'} component={Box} px={3}>
-                            {'edit'}
+                            {'Edit'}
                         </Typography>
                     </MenuItem>
                     <MenuItem
@@ -187,7 +187,7 @@ const UserRow = ({ each, i, pageLimit, page, deleteCallback, editCallback }) => 
                         }}
                     >
                         <Typography align={'center'} component={Box} px={3}>
-                            {'delete'}
+                            {'Delete'}
                         </Typography>
                     </MenuItem>
                 </Box>

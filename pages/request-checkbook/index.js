@@ -97,4 +97,4 @@ const Index = () => {
 }
 
 export default Index
-Index.title = 'Request for checkbook'
+Index.title = 'Request for cheque book'

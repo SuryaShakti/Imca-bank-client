@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PageHeaderComponent from "../../../src/components/AdminComponents/PageHeaderComponent";
 import {
     Box,
@@ -10,12 +10,12 @@ import {
     TableHead,
     TableRow
 } from "@material-ui/core";
-import {useSnackbar} from "notistack";
-import {makeStyles, withStyles} from "@material-ui/styles";
-import {getAllUsers, CreateUser} from "../../../src/apis/users";
+import { useSnackbar } from "notistack";
+import { makeStyles, withStyles } from "@material-ui/styles";
+import { getAllUsers, CreateUser } from "../../../src/apis/users";
 import UserRow from "../../../src/components/AdminComponents/UserRow";
-import {Pagination} from "@material-ui/lab";
-import {uploadFile} from "../../../src/apis/upload";
+import { Pagination } from "@material-ui/lab";
+import { uploadFile } from "../../../src/apis/upload";
 import CreateUserDialog from '../../../src/components/AdminComponents/CreateUser/CreateUser';
 
 const useStyles = makeStyles((theme) => ({
@@ -75,6 +75,7 @@ const Index = () => {
             .then((res) => {
                 setTotal(res.total);
                 setAllData(res.data);
+                console.log(res.data);
                 setPageRows(res.data);
                 if (res.total % pageLimit === 0) {
                     setTotalPages(res.total / pageLimit);
@@ -82,45 +83,49 @@ const Index = () => {
                     setTotalPages(Math.floor(res.total / pageLimit) + 1);
                 }
             })
-            .catch((e) => enqueueSnackbar(e.message ? e.message: 'Something Went Wrong', { variant: 'warning' }))
+            .catch((e) => enqueueSnackbar(e.message ? e.message : 'Something Went Wrong', { variant: 'warning' }))
             .finally(() => {
                 setLoading(false);
             });
-    },[search]);
+    }, [search]);
 
     const validate = () => {
         if (!imageFile) {
             enqueueSnackbar('Please select an image.', { variant: 'warning' });
             return false;
-        } else if (name.trim() === ''){
+        } else if (name.trim() === '') {
             enqueueSnackbar("Please Enter user's name.", { variant: 'warning' });
             return false;
         }
-        else if (email.trim() === ''){
+        else if (email.trim() === '') {
             enqueueSnackbar("Please Enter user's email.", { variant: 'warning' });
             return false;
         }
-        else if (phone.trim() === ''){
+        else if (phone.trim() === '') {
             enqueueSnackbar("Please Enter user's phone number.", { variant: 'warning' });
             return false;
         }
-        else if (address.trim() === ''){
+        // else if (phone.trim() === '') {
+        //     enqueueSnackbar("Please Enter user's phone number.", { variant: 'warning' });
+        //     return false;
+        // }
+        else if (address.trim() === '') {
             enqueueSnackbar("Please Enter user's address.", { variant: 'warning' });
             return false;
         }
-        else if (dob.trim() === ''){
+        else if (dob.trim() === '') {
             enqueueSnackbar("Please Enter user's Date of birth.", { variant: 'warning' });
             return false;
         }
-        else if (aadhar.trim() === ''){
+        else if (aadhar.trim() === '') {
             enqueueSnackbar("Please Enter user's aadhar number.", { variant: 'warning' });
             return false;
         }
-        else if (!gender){
+        else if (!gender) {
             enqueueSnackbar("Please select user's gender.", { variant: 'warning' });
             return false;
         }
-        else if (password.trim() === ''){
+        else if (password.trim() === '') {
             enqueueSnackbar("Please Enter password to be assigned to the user.", { variant: 'warning' });
             return false;
         } else {
@@ -129,11 +134,12 @@ const Index = () => {
     }
 
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         if (validate()) {
             setCreating(true);
-            uploadFile(imageFile).then((response) => {
-                CreateUser(name, phone, email, dob, address, aadhar, response.file, gender, password)
+            await uploadFile(imageFile).then((response) => {
+                console.log(response);
+                CreateUser(name, phone, email, dob, address, aadhar, response.files[0], gender, password)
                     .then((res) => {
                         let _rows = pageRows;
                         _rows.push(res);
@@ -146,9 +152,9 @@ const Index = () => {
                         setGender(1);
                         setDob('');
                         setPassword('');
-                        enqueueSnackbar('User Created Successfully', {variant: 'success'});
+                        enqueueSnackbar('User Created Successfully', { variant: 'success' });
                     })
-                    .catch((e) => enqueueSnackbar(e.message ? e.message: 'Something Went Wrong', { variant: 'warning' }))
+                    .catch((e) => enqueueSnackbar(e.message ? e.message : 'Something Went Wrong', { variant: 'warning' }))
                     .finally(() => {
                         setCreating(false);
                         setOpenCreate(false);
@@ -186,7 +192,7 @@ const Index = () => {
                     setAllData(_allData);
                 }
             })
-            .catch((e) => enqueueSnackbar(e.message ? e.message: 'Something Went Wrong', { variant: 'warning' }))
+            .catch((e) => enqueueSnackbar(e.message ? e.message : 'Something Went Wrong', { variant: 'warning' }))
             .finally(() => setLoading(false));
     };
 
@@ -265,13 +271,13 @@ const Index = () => {
                                 ))
                             ) : !loading ? (
                                 <TableRow>
-                                    <TableCell align="center" colSpan={5}>
+                                    <TableCell align="center" colSpan={7}>
                                         {'No Users Available'}
                                     </TableCell>
                                 </TableRow>
                             ) : (
                                 <TableRow>
-                                    <TableCell align="center" colSpan={5}>
+                                    <TableCell align="center" colSpan={7}>
                                         <CircularProgress size={27} />
                                     </TableCell>
                                 </TableRow>
@@ -332,5 +338,4 @@ const Index = () => {
 
 export default Index;
 
-// Index.Layout = null;
 Index.title = 'All Users'
